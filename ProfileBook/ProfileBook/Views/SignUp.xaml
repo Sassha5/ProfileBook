@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="ProfileBook.Views.SignUp">
+    <StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Entry x:Name="loginInput" 
+                   Placeholder="Login" 
+                   Text="{Binding Path=Login, Mode=TwoWay}" 
+                   Grid.Row="0"/>
+            <Entry x:Name="passwordFirstInput" 
+                   Placeholder="Password" 
+                   Text="{Binding Path=FirstPassword, Mode=TwoWay}" 
+                   IsPassword="True" 
+                   Grid.Row="1" />
+            <Entry x:Name="passwordSecondInput" 
+                   Placeholder="Confirm Password" 
+                   Text="{Binding Path=SecondPassword, Mode=TwoWay}" 
+                   IsPassword="True" 
+                   Grid.Row="2"/>
+            <Button x:Name="signUpButton" 
+                    Text="Sign Up" 
+                    Grid.Row="3"/>
+        </Grid>
+    </StackLayout>
+</ContentPage>

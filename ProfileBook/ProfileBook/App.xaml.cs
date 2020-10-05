@@ -19,7 +19,7 @@ namespace ProfileBook
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync("NavigationPage/SignIn");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -28,6 +28,8 @@ namespace ProfileBook
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<SignIn, SignInViewModel>();
+            containerRegistry.RegisterForNavigation<SignUp, SignUpViewModel>();
         }
     }
 }
