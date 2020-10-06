@@ -21,5 +21,11 @@ namespace ProfileBook.ViewModels
         {
 
         }
+
+        public ICommand Register => new Command<string>(async (url) =>
+        {
+            //await Application.Current.MainPage.DisplayAlert("hi", "hello", "cancel");
+            //model.Authorize(Login, Password)
+        });
     }
 }

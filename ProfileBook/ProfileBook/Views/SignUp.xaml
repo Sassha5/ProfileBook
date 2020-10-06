@@ -28,7 +28,8 @@
                    Grid.Row="2"/>
             <Button x:Name="signUpButton" 
                     Text="Sign Up" 
-                    Grid.Row="3"/>
+                    Grid.Row="3"
+                    Command="{Binding Register}"/>
         </Grid>
     </StackLayout>
 </ContentPage>
