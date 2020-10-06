@@ -3,22 +3,50 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProfileBook.Views.MainPage"
              Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Logout"
+                 Order="Primary"
+                 Priority="1" />
+        <ToolbarItem Text="Settings"
+                 Order="Primary"
+                 Priority="0" />
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-    <StackLayout>
-        <ListView x:Name="profilesList" ItemsSource="{Binding}"><!--ItemSelected="OnItemSelected"-->
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <ViewCell.View>
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding Name}" FontSize="Medium" />
-                            </StackLayout>
-                        </ViewCell.View>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <Button Text="Add" Command="{Binding CreateProfile}" />
-    </StackLayout>
 
+        <ScrollView Grid.Row="0">
+            <StackLayout>
+                <ListView x:Name="profilesList" ItemsSource="{Binding}" ItemSelected="OnItemSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Name}" FontSize="Medium" />
+                                    </StackLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+
+        <Button Grid.Row="0" 
+                Text="+" 
+                FontSize="Large"
+                FontAttributes="Bold" 
+                BackgroundColor="DeepSkyBlue" 
+                BorderRadius="35" 
+                TextColor="White" 
+                HorizontalOptions="End" 
+                Margin="0,0,20,22" 
+                VerticalOptions="End" 
+                WidthRequest="70" 
+                HeightRequest="70" 
+                Command="{Binding CreateProfile}"/>
+    </Grid>
 </ContentPage>

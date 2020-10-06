@@ -3,7 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="ProfileBook.Views.CreateProfile">
+             x:Class="ProfileBook.Views.CreateProfile"
+             Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add"
+                 Order="Primary"
+                 Priority="0"
+                 Command="{Binding Add}"/>
+    </ContentPage.ToolbarItems>
     <StackLayout>
         <Grid>
             <Grid.RowDefinitions>
@@ -24,10 +31,6 @@
                     Placeholder="Description"
                     Text="{Binding Path=Description, Mode=TwoWay}"
                     Grid.Row="2"/>
-            <Button x:Name="addButton" 
-                    Text="Add" 
-                    Grid.Row="3"
-                    Command="{Binding Add}"/>
         </Grid>
     </StackLayout>
 </ContentPage>

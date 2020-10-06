@@ -15,5 +15,14 @@ namespace ProfileBook.Views
             profilesList.ItemsSource = App.Database.GetItems();
             base.OnAppearing();
         }
+
+        public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            await Application.Current.MainPage.DisplayAlert("hi", "hello", "cancel");
+            //Profile selectedProfile = (Profile)e.SelectedItem;
+            //ProfilePage ProfilePage = new ProfilePage();
+            //ProfilePage.BindingContext = selectedProfile;
+            //await Navigation.PushAsync(ProfilePage);
+        }
     }
 }

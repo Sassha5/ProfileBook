@@ -25,8 +25,9 @@ namespace ProfileBook.ViewModels
             await NavigationService.NavigateAsync("CreateProfile");
         });
 
-        //private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        //public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         //{
+        //    await Application.Current.MainPage.DisplayAlert("hi", "hello", "cancel");
         //    //Profile selectedProfile = (Profile)e.SelectedItem;
         //    //ProfilePage ProfilePage = new ProfilePage();
         //    //ProfilePage.BindingContext = selectedProfile;
