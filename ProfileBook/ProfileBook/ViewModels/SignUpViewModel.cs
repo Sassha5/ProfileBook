@@ -19,7 +19,7 @@ namespace ProfileBook.ViewModels
         public SignUpViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-
+            Title = "Sign Up Page";
         }
 
         public ICommand Register => new Command<string>(async (url) =>

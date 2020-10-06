@@ -49,6 +49,7 @@ namespace ProfileBook
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<SignIn, SignInViewModel>();
             containerRegistry.RegisterForNavigation<SignUp, SignUpViewModel>();
+            containerRegistry.RegisterForNavigation<CreateProfile, CreateProfileViewModel>();
         }
     }
 }

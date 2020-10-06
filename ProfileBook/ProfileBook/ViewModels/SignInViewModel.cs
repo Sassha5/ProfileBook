@@ -14,7 +14,7 @@ namespace ProfileBook.ViewModels
         public SignInViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-
+            Title = "Sign In Page";
         }
 
         public string Login { get; set; }
@@ -22,13 +22,14 @@ namespace ProfileBook.ViewModels
 
         public ICommand ClickCommand => new Command<string>(async (url) =>
         {
-            await NavigationService.NavigateAsync("NavigationPage/SignUp");
+            await NavigationService.NavigateAsync("SignUp");
         });
 
         public ICommand Authorize => new Command<string>(async (url) =>
         {
             //await Application.Current.MainPage.DisplayAlert("hi", "hello", "cancel");
             //model.Authorize(Login, Password)
+            await NavigationService.NavigateAsync("MainPage");
         });
     }
 }
