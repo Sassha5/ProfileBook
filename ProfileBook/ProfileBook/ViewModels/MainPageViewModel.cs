@@ -31,6 +31,11 @@ namespace ProfileBook.ViewModels
             await NavigationService.NavigateAsync("SignIn");
         });
 
+        public ICommand Settings => new Command<string>(async (url) =>
+        {
+            await NavigationService.NavigateAsync("Settings");
+        });
+
         //public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         //{
         //    await Application.Current.MainPage.DisplayAlert("hi", "hello", "cancel");

@@ -11,26 +11,28 @@
                  Priority="0"
                  Command="{Binding Add}"/>
     </ContentPage.ToolbarItems>
-    <StackLayout>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Entry x:Name="nicknameInput" 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Entry x:Name="nicknameInput" 
                    Placeholder="Nickname" 
                    Text="{Binding Path=Nickname, Mode=TwoWay}" 
                    Grid.Row="0"/>
-            <Entry x:Name="nameInput" 
+        <Entry x:Name="nameInput" 
                    Placeholder="Name" 
                    Text="{Binding Path=Name, Mode=TwoWay}" 
                    Grid.Row="1" />
-            <Editor x:Name="descriptionInput"
+        <Editor x:Name="descriptionInput"
                     Placeholder="Description"
                     Text="{Binding Path=Description, Mode=TwoWay}"
                     Grid.Row="2"/>
-        </Grid>
-    </StackLayout>
+    </Grid>
 </ContentPage>

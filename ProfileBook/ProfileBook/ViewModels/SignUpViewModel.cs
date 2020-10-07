@@ -25,15 +25,15 @@ namespace ProfileBook.ViewModels
 
         public ICommand Register => new Command<string>(async (url) =>
         {
-            //if (!App.database.FindUser(Login) && Password.Equals(ConfirmPassword))
-            //{
+            if (!App.Database.FindUser(Login) && Password.Equals(ConfirmPassword))
+            {
                 App.client.Register(Login, Password);
                 await NavigationService.NavigateAsync("MainPage");
-            //}
-            //else
-            //{
-            //    await Application.Current.MainPage.DisplayAlert("Oops...", "Something goes not as planned...", "cancel");
-            //}
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Oops...", "Something goes not as planned...", "cancel");
+            }
         });
     }
 }

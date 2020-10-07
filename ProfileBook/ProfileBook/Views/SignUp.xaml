@@ -5,13 +5,16 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ProfileBook.Views.SignUp"
              Title="{Binding Title}">
-    <StackLayout>
-        <Grid>
+    <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Entry x:Name="loginInput" 
                    Placeholder="Login" 
@@ -29,8 +32,7 @@
                    Grid.Row="2"/>
             <Button x:Name="signUpButton" 
                     Text="Sign Up" 
-                    Grid.Row="3"
+                    Grid.Row="7"
                     Command="{Binding Register}"/>
         </Grid>
-    </StackLayout>
 </ContentPage>

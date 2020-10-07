@@ -10,7 +10,8 @@
                  Command="{Binding Logout}"/>
         <ToolbarItem Text="Settings"
                  Order="Primary"
-                 Priority="0" />
+                 Priority="0"
+                 Command="{Binding Settings}"/>
     </ContentPage.ToolbarItems>
     <Grid>
         <Grid.RowDefinitions>

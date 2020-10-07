@@ -5,41 +5,43 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ProfileBook.Views.SignIn"
              Title="{Binding Title}">
-    <StackLayout>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Entry x:Name="loginInput" 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Entry x:Name="loginInput" 
                    Placeholder="Login" 
                    Text="{Binding Path=Login, Mode=TwoWay}" 
                    Grid.Row="0"/>
-            <Entry x:Name="passwordInput" 
+        <Entry x:Name="passwordInput" 
                    Placeholder="Password" 
                    Text="{Binding Path=Password, Mode=TwoWay}" 
                    IsPassword="True" 
                    Grid.Row="1" />
-            <Button x:Name="signInButton" 
+        <Button x:Name="signInButton" 
                     Text="Sign In" 
-                    Grid.Row="2"
+                    Grid.Row="6"
                     Command="{Binding Authorize}"/>
-            <Label HorizontalOptions="Center"
-                VerticalOptions="CenterAndExpand" Grid.Row="3">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="Sign Up"
+        <Label HorizontalOptions="Center"
+                VerticalOptions="CenterAndExpand" Grid.Row="7">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Sign Up"
                             TextColor="Blue"
                             TextDecorations="Underline">
-                            <Span.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding ClickCommand}"/>
-                            </Span.GestureRecognizers>
-                        </Span>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-        </Grid>
-    </StackLayout>
+                        <Span.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ClickCommand}"/>
+                        </Span.GestureRecognizers>
+                    </Span>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+    </Grid>
 </ContentPage>
