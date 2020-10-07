@@ -6,7 +6,7 @@ using System.Text;
 namespace ProfileBook.Models
 {
     [Table("Users")]
-    class User
+    public class User
     {
         [PrimaryKey, AutoIncrement, Column("_id")]
         public int Id { get; set; }

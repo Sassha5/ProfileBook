@@ -25,11 +25,12 @@ namespace ProfileBook.ViewModels
 
         public ICommand Add => new Command<string>(async (url) =>
         {
-            App.database.SaveItem(new Profile
+            App.ProfilesDatabase.SaveItem(new Profile
             {
                 Nickname = this.Nickname,
                 Name = this.Name,
-                Description = this.Description
+                Description = this.Description,
+                UserId = App.currentUser.Id
             });
             await NavigationService.NavigateAsync("MainPage");
         });

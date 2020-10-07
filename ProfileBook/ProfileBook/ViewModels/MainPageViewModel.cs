@@ -25,6 +25,12 @@ namespace ProfileBook.ViewModels
             await NavigationService.NavigateAsync("CreateProfile");
         });
 
+        public ICommand Logout => new Command<string>(async (url) =>
+        {
+            App.currentUser = null;
+            await NavigationService.NavigateAsync("SignIn");
+        });
+
         //public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         //{
         //    await Application.Current.MainPage.DisplayAlert("hi", "hello", "cancel");

@@ -6,7 +6,8 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Logout"
                  Order="Primary"
-                 Priority="1" />
+                 Priority="1"
+                 Command="{Binding Logout}"/>
         <ToolbarItem Text="Settings"
                  Order="Primary"
                  Priority="0" />

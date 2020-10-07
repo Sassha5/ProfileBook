@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ProfileBook.Models
 {
-    public class ProfilesRepository
+    public class ProfilesRepository : IRepository<Profile>
     {
         SQLiteConnection database;
         public ProfilesRepository(string databasePath)

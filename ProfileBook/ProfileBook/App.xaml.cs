@@ -8,24 +8,39 @@ using Xamarin.Forms;
 using ProfileBook.Models;
 using System;
 using System.IO;
+using System.Data;
 
 namespace ProfileBook
 {
     public partial class App
     {
-        public const string DATABASE_NAME = "profiles.db";
-        public static ProfilesRepository database;
-        public static ProfilesRepository Database
+        public const string DATABASE_NAME = "users.db";
+        public const string PROFILES_DATABASE_NAME = "profiles.db";
+        public static string DATABASE_PATH = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        private static UsersRepository database;
+        private static ProfilesRepository profilesDatabase;
+        public static User currentUser;
+        public static Client client = new Client();
+        public static UsersRepository Database
         {
             get
             {
                 if (database == null)
                 {
-                    database = new ProfilesRepository(
-                        Path.Combine(
-                            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DATABASE_NAME));
+                    database = new UsersRepository(Path.Combine(DATABASE_PATH, DATABASE_NAME));
                 }
                 return database;
+            }
+        }
+        public static ProfilesRepository ProfilesDatabase
+        {
+            get
+            {
+                if (profilesDatabase == null)
+                {
+                    profilesDatabase = new ProfilesRepository(Path.Combine(DATABASE_PATH, PROFILES_DATABASE_NAME));
+                }
+                return profilesDatabase;
             }
         }
 

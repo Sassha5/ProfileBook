@@ -27,9 +27,14 @@ namespace ProfileBook.ViewModels
 
         public ICommand Authorize => new Command<string>(async (url) =>
         {
-            //await Application.Current.MainPage.DisplayAlert("hi", "hello", "cancel");
-            //model.Authorize(Login, Password)
-            await NavigationService.NavigateAsync("MainPage");
+            if (App.client.Authorize(Login, Password))
+            {
+                await NavigationService.NavigateAsync("MainPage");
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Oops...", "Wrong credentials", "cancel");
+            }
         });
     }
 }

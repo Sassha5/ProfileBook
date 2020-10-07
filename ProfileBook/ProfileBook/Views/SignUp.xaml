@@ -19,12 +19,12 @@
                    Grid.Row="0"/>
             <Entry x:Name="passwordFirstInput" 
                    Placeholder="Password" 
-                   Text="{Binding Path=FirstPassword, Mode=TwoWay}" 
+                   Text="{Binding Path=Password, Mode=TwoWay}" 
                    IsPassword="True" 
                    Grid.Row="1" />
             <Entry x:Name="passwordSecondInput" 
                    Placeholder="Confirm Password" 
-                   Text="{Binding Path=SecondPassword, Mode=TwoWay}" 
+                   Text="{Binding Path=ConfirmPassword, Mode=TwoWay}" 
                    IsPassword="True" 
                    Grid.Row="2"/>
             <Button x:Name="signUpButton" 

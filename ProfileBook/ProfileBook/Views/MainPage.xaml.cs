@@ -1,5 +1,7 @@
 ﻿using ProfileBook.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace ProfileBook.Views
@@ -12,7 +14,7 @@ namespace ProfileBook.Views
         }
         protected override void OnAppearing()
         {
-            profilesList.ItemsSource = App.Database.GetItems();
+            profilesList.ItemsSource = App.ProfilesDatabase.GetItems().Where(x => x.UserId == App.currentUser.Id);
             base.OnAppearing();
         }
 

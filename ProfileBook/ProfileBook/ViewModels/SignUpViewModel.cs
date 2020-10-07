@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using ProfileBook.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,8 @@ namespace ProfileBook.ViewModels
     public class SignUpViewModel : ViewModelBase
     {
         public string Login { get; set; }
-        public string FirstPassword { get; set; }
-        public string SecondPassword { get; set; }
+        public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
 
 
         public SignUpViewModel(INavigationService navigationService)
@@ -24,8 +25,15 @@ namespace ProfileBook.ViewModels
 
         public ICommand Register => new Command<string>(async (url) =>
         {
-            //await Application.Current.MainPage.DisplayAlert("hi", "hello", "cancel");
-            //model.Authorize(Login, Password)
+            //if (!App.database.FindUser(Login) && Password.Equals(ConfirmPassword))
+            //{
+                App.client.Register(Login, Password);
+                await NavigationService.NavigateAsync("MainPage");
+            //}
+            //else
+            //{
+            //    await Application.Current.MainPage.DisplayAlert("Oops...", "Something goes not as planned...", "cancel");
+            //}
         });
     }
 }
