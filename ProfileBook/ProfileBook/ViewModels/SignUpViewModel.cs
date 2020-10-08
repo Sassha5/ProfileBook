@@ -20,10 +20,10 @@ namespace ProfileBook.ViewModels
         public SignUpViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-            Title = "Sign Up Page";
+            Title = "Sign Up";
         }
 
-        public ICommand Register => new Command<string>(async (url) =>
+        public ICommand Register => new Command(async () =>
         {
             if (!App.Database.FindUser(Login) && Password.Equals(ConfirmPassword))
             {

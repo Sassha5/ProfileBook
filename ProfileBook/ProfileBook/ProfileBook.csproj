@@ -5,10 +5,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\icons\drawable-hdpi\ic_add.png" />
+    <None Remove="Assets\icons\drawable-hdpi\ic_camera_alt.png" />
+    <None Remove="Assets\icons\drawable-hdpi\ic_collections.png" />
+    <None Remove="Assets\icons\drawable-hdpi\ic_exit_to_app.png" />
+    <None Remove="Assets\icons\drawable-hdpi\ic_save.png" />
+    <None Remove="Assets\icons\drawable-hdpi\ic_settings.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
     <PackageReference Include="Xamarin.Forms" Version="4.7.0.1239" />
     <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.5.3.2" />
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\icons\drawable-hdpi\ic_add.png" />
+    <Resource Include="Assets\icons\drawable-hdpi\ic_camera_alt.png" />
+    <Resource Include="Assets\icons\drawable-hdpi\ic_collections.png" />
+    <Resource Include="Assets\icons\drawable-hdpi\ic_exit_to_app.png" />
+    <Resource Include="Assets\icons\drawable-hdpi\ic_save.png" />
+    <Resource Include="Assets\icons\drawable-hdpi\ic_settings.png" />
   </ItemGroup>
 
   <ItemGroup>

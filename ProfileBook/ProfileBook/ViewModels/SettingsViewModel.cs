@@ -12,6 +12,7 @@ namespace ProfileBook.ViewModels
         public SettingsViewModel(INavigationService navigationService)
             : base(navigationService)
         {
+            Title = "Settings";
         }
     }
 }

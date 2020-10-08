@@ -18,20 +18,20 @@ namespace ProfileBook.ViewModels
             Title = "Main Page";
         }
 
-        public ICommand CreateProfile => new Command<string>(async (url) =>
+        public ICommand CreateProfile => new Command(async () =>
         {
             //await Application.Current.MainPage.DisplayAlert("hi", "hello", "cancel");
             //model.Authorize(Login, Password)
             await NavigationService.NavigateAsync("CreateProfile");
         });
 
-        public ICommand Logout => new Command<string>(async (url) =>
+        public ICommand Logout => new Command(async () =>
         {
             App.currentUser = null;
-            await NavigationService.NavigateAsync("SignIn");
+            await NavigationService.NavigateAsync("/NavigationPage/SignIn");
         });
 
-        public ICommand Settings => new Command<string>(async (url) =>
+        public ICommand Settings => new Command(async () =>
         {
             await NavigationService.NavigateAsync("Settings");
         });

@@ -6,10 +6,10 @@
              x:Class="ProfileBook.Views.CreateProfile"
              Title="{Binding Title}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add"
-                 Order="Primary"
+        <ToolbarItem Order="Primary"
                  Priority="0"
-                 Command="{Binding Add}"/>
+                 Command="{Binding Add}"
+                 IconImageSource="ic_save.png"/>
     </ContentPage.ToolbarItems>
     <Grid>
         <Grid.RowDefinitions>

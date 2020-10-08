@@ -20,10 +20,10 @@ namespace ProfileBook.ViewModels
         public CreateProfileViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-            Title = "New Profile Page";
+            Title = "New Profile";
         }
 
-        public ICommand Add => new Command<string>(async (url) =>
+        public ICommand Add => new Command(async () =>
         {
             App.ProfilesDatabase.SaveItem(new Profile
             {
