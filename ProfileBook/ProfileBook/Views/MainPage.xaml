@@ -21,15 +21,22 @@
 
         <ScrollView Grid.Row="0">
             <StackLayout>
-                <ListView x:Name="profilesList" ItemsSource="{Binding}" ItemSelected="OnItemSelected">
+                <ListView x:Name="profilesList" ItemsSource="{Binding Profiles}" RowHeight="100">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
-                                <ViewCell.View>
-                                    <StackLayout Orientation="Horizontal">
+                            <ViewCell Height="100">
+                                <ViewCell.ContextActions>
+                                    <MenuItem Text="Edit" Command="{Binding Path=MainPageViewModel.Edit, Source={x:Reference Name=profilesList}}" CommandParameter="{Binding .}"/>
+                                    <MenuItem Text="Delete" Command="{Binding Delete}" CommandParameter="{Binding}"/>
+                                </ViewCell.ContextActions>
+                                <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                    <Image Source="pic_profile.png" Aspect="AspectFit" />
+                                    <StackLayout>
                                         <Label Text="{Binding Name}" FontSize="Medium" />
+                                        <Label Text="{Binding Nickname}"/>
+                                        <Label Text="{Binding Description>}"/>
                                     </StackLayout>
-                                </ViewCell.View>
+                                </StackLayout>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>

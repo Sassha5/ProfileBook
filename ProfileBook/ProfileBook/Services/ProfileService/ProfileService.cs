@@ -1,31 +1,38 @@
-﻿using SQLite;
+﻿using ProfileBook.Models;
+using ProfileBook.Services.Repository;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProfileBook.Models
+namespace ProfileBook.Services.ProfileService
 {
-    public class ProfilesRepository : IRepository<Profile>
+    class ProfileService : IProfileService
     {
-        SQLiteConnection database;
-        public ProfilesRepository(string databasePath)
+        private SQLiteConnection database;
+
+        public ProfileService(IRepository repository)
         {
-            database = new SQLiteConnection(databasePath);
+            database = repository.database;
             database.CreateTable<Profile>();
         }
-        public IEnumerable<Profile> GetItems()
+
+        public IEnumerable<Profile> GetProfiles()
         {
             return database.Table<Profile>().ToList();
         }
-        public Profile GetItem(int id)
+
+        public Profile GetProfile(int id)
         {
             return database.Get<Profile>(id);
         }
-        public int DeleteItem(int id)
+
+        public int DeleteProfile(int id)
         {
             return database.Delete<Profile>(id);
         }
-        public int SaveItem(Profile item)
+
+        public int SaveProfile(Profile item)
         {
             if (item.Id != 0)
             {
