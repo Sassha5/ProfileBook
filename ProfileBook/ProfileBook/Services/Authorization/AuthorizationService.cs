@@ -11,9 +11,11 @@ namespace ProfileBook.Services.Authorization
     class AuthorizationService : IAuthorizationService
     {
         private readonly IRepository _repository;
-        public AuthorizationService(IRepository repository)
+        private readonly ISettingsManager _settingsManager;
+        public AuthorizationService(IRepository repository, ISettingsManager settingsManager)
         {
             _repository = repository;
+            _settingsManager = settingsManager;
         }
 
         public bool Authorize(string login, string password)
@@ -21,7 +23,7 @@ namespace ProfileBook.Services.Authorization
             var user = _repository.GetUsers().FirstOrDefault(x => x.Login == login && x.Password == password);
             if (user != null)
             {
-                App.currentUser = user;
+                _settingsManager.AuthorizedUserID = user.Id;
                 return true;
             }
             return false;

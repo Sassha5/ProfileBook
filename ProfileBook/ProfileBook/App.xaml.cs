@@ -13,13 +13,13 @@ using ProfileBook.Services.Authorization;
 using ProfileBook.Services.Registration;
 using ProfileBook.Services.Repository;
 using ProfileBook.Services.ProfileService;
+using ProfileBook.Services.Settings;
+using Plugin.Settings;
 
 namespace ProfileBook
 {
     public partial class App
     {
-        public static User currentUser;
-
         public App(IPlatformInitializer initializer)
             : base(initializer)
         {
@@ -43,6 +43,8 @@ namespace ProfileBook
             containerRegistry.RegisterForNavigation<CreateProfile, CreateProfileViewModel>();
             containerRegistry.RegisterForNavigation<Settings, SettingsViewModel>();
 
+            containerRegistry.RegisterInstance(CrossSettings.Current);
+            containerRegistry.RegisterInstance<ISettingsManager>(Container.Resolve<SettingsManager>());
             containerRegistry.RegisterInstance<IRepository>(Container.Resolve<Repository>());
             containerRegistry.RegisterInstance<IProfileService>(Container.Resolve<ProfileService>());
             containerRegistry.RegisterInstance<IAuthorizationService>(Container.Resolve<AuthorizationService>());

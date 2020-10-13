@@ -3,6 +3,7 @@ using Prism.Mvvm;
 using Prism.Navigation;
 using ProfileBook.Models;
 using ProfileBook.Services.ProfileService;
+using ProfileBook.Services.Settings;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,20 +17,24 @@ namespace ProfileBook.ViewModels
     public class MainPageViewModel : ViewModelBase
     {
         private readonly IProfileService _profileService;
+        private readonly ISettingsManager _settingsManager;
+
 
         public ObservableCollection<Profile> Profiles { get; set; }
         public MainPageViewModel(INavigationService navigationService,
-            IProfileService profileService)
+            IProfileService profileService,
+            ISettingsManager settingsManager)
             : base(navigationService)
         {
             _profileService = profileService;
+            _settingsManager = settingsManager;
             Title = "Main Page";
             UpdateCollection();
         }
 
         private void UpdateCollection()
         {
-            var profiles = _profileService.GetProfiles().Where(x => x.UserId == App.currentUser.Id);
+            var profiles = _profileService.GetProfiles().Where(x => x.UserId == _settingsManager.AuthorizedUserID);
             Profiles = new ObservableCollection<Profile>();
             foreach (Profile profile in profiles)
             {
@@ -49,7 +54,7 @@ namespace ProfileBook.ViewModels
 
         public ICommand Logout => new Command(async () =>
         {
-            App.currentUser = null;
+            _settingsManager.AuthorizedUserID = -1;
             await NavigationService.NavigateAsync("/NavigationPage/SignIn");
         });
 

@@ -4,7 +4,8 @@ using System.Text;
 
 namespace ProfileBook.Services.Settings
 {
-    interface ISettings
+    public interface ISettingsManager
     {
+        int AuthorizedUserID { get; set; }
     }
 }

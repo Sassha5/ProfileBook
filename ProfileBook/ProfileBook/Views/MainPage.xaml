@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProfileBook.Views.MainPage"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             x:Name="profilesPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Primary"
                  Priority="1"
@@ -18,31 +19,26 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-
-        <ScrollView Grid.Row="0">
-            <StackLayout>
-                <ListView x:Name="profilesList" ItemsSource="{Binding Profiles}" RowHeight="100">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell Height="100">
-                                <ViewCell.ContextActions>
-                                    <MenuItem Text="Edit" Command="{Binding Path=MainPageViewModel.Edit, Source={x:Reference Name=profilesList}}" CommandParameter="{Binding .}"/>
-                                    <MenuItem Text="Delete" Command="{Binding Delete}" CommandParameter="{Binding}"/>
-                                </ViewCell.ContextActions>
-                                <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                    <Image Source="pic_profile.png" Aspect="AspectFit" />
-                                    <StackLayout>
-                                        <Label Text="{Binding Name}" FontSize="Medium" />
-                                        <Label Text="{Binding Nickname}"/>
-                                        <Label Text="{Binding Description>}"/>
-                                    </StackLayout>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackLayout>
-        </ScrollView>
+        <ListView x:Name="profilesList" ItemsSource="{Binding Profiles}" RowHeight="100">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell Height="100">
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Edit" Command="{Binding Path=MainPageViewModel.Edit, Source={x:Reference Name=profilesPage}}" CommandParameter="{Binding .}"/>
+                            <MenuItem Text="Delete" Command="{Binding Delete}" CommandParameter="{Binding}"/>
+                        </ViewCell.ContextActions>
+                        <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                            <Image Source="pic_profile.png" Aspect="AspectFit" />
+                            <StackLayout>
+                                <Label Text="{Binding Name}" FontSize="Medium" />
+                                <Label Text="{Binding Nickname}"/>
+                                <Label Text="{Binding Description>}"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
         <Button Grid.Row="0" 
                 ImageSource="ic_add.png"

@@ -22,17 +22,21 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <ImageButton x:Name="profileImage"
+                     Source="{Binding Path=ProfileImage, Mode=TwoWay}"
+                     Command="{Binding ChooseImage}"
+               Grid.Row="0"/>
         <Entry x:Name="nicknameInput" 
                    Placeholder="Nickname" 
                    Text="{Binding Path=Nickname, Mode=TwoWay}" 
-                   Grid.Row="0"/>
+                   Grid.Row="1"/>
         <Entry x:Name="nameInput" 
                    Placeholder="Name" 
                    Text="{Binding Path=Name, Mode=TwoWay}" 
-                   Grid.Row="1" />
+                   Grid.Row="2" />
         <Editor x:Name="descriptionInput"
                     Placeholder="Description"
                     Text="{Binding Path=Description, Mode=TwoWay}"
-                    Grid.Row="2"/>
+                    Grid.Row="3"/>
     </Grid>
 </ContentPage>
