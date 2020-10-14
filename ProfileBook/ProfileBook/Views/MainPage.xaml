@@ -19,20 +19,20 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ListView x:Name="profilesList" ItemsSource="{Binding Profiles}" RowHeight="100">
+        <ListView ItemsSource="{Binding Profiles}" RowHeight="100">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell Height="100">
                         <ViewCell.ContextActions>
-                            <MenuItem Text="Edit" Command="{Binding Path=MainPageViewModel.Edit, Source={x:Reference Name=profilesPage}}" CommandParameter="{Binding .}"/>
-                            <MenuItem Text="Delete" Command="{Binding Delete}" CommandParameter="{Binding}"/>
+                            <MenuItem Text="Edit" Command="{Binding Path=BindingContext.Edit, Source={x:Reference profilesPage}}" CommandParameter="{Binding .}"/>
+                            <MenuItem Text="Delete" Command="{Binding Path=BindingContext.Delete, Source={x:Reference profilesPage}}" CommandParameter="{Binding .}"/>
                         </ViewCell.ContextActions>
                         <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                             <Image Source="pic_profile.png" Aspect="AspectFit" />
-                            <StackLayout>
-                                <Label Text="{Binding Name}" FontSize="Medium" />
-                                <Label Text="{Binding Nickname}"/>
-                                <Label Text="{Binding Description>}"/>
+                            <StackLayout VerticalOptions="Center">
+                                <Label Text="{Binding Nickname}" FontAttributes="Bold"/>
+                                <Label Text="{Binding Name}"/>
+                                <Label Text="{Binding Date}"/>
                             </StackLayout>
                         </StackLayout>
                     </ViewCell>

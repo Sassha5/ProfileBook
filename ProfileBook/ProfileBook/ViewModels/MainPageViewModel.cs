@@ -18,9 +18,19 @@ namespace ProfileBook.ViewModels
     {
         private readonly IProfileService _profileService;
         private readonly ISettingsManager _settingsManager;
+        private ObservableCollection<Profile> profiles;
+
+        public ObservableCollection<Profile> Profiles
+        {
+            get { return profiles; }
+            set
+            {
+                profiles = value;
+                RaisePropertyChanged("Profiles");
+            }
+        }
 
 
-        public ObservableCollection<Profile> Profiles { get; set; }
         public MainPageViewModel(INavigationService navigationService,
             IProfileService profileService,
             ISettingsManager settingsManager)
@@ -63,17 +73,19 @@ namespace ProfileBook.ViewModels
             await NavigationService.NavigateAsync("Settings");
         });
 
-        public ICommand Edit => new Command(async () =>
+        public ICommand Edit => new Command(async (object arg) =>
         {
-            await Application.Current.MainPage.DisplayAlert("hi", "hello", "cancel");
-            //await NavigationService.NavigateAsync("Settings");
+            Profile profile = arg as Profile;
+            NavigationParameters navParams = new NavigationParameters();
+            navParams.Add("profile", profile);
+            await NavigationService.NavigateAsync("CreateProfile", navParams);
         });
 
-        public ICommand Delete => new Command(async (object arg) =>
+        public ICommand Delete => new Command((object arg) =>
         {
-            await Application.Current.MainPage.DisplayAlert("hi", "hello", "cancel");
-            //Profile profile = arg as Profile;
-            //App.ProfilesDatabase.DeleteItem(profile.Id);
+            Profile profile = arg as Profile;
+            _profileService.DeleteProfile(profile.Id);
+            UpdateCollection();
         });
     }
 }

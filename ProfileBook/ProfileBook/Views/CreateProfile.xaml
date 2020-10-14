@@ -8,7 +8,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Primary"
                  Priority="0"
-                 Command="{Binding Add}"
+                 Command="{Binding Save}"
                  IconImageSource="ic_save.png"/>
     </ContentPage.ToolbarItems>
     <Grid>

@@ -19,9 +19,39 @@ namespace ProfileBook.ViewModels
         private readonly IProfileService _profileService;
         private readonly ISettingsManager _settingsManager;
 
-        public string Nickname { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        private Profile profile;
+        private string nickname;
+        private string name;
+        private string description;
+
+        public string Nickname 
+        {
+            get { return nickname; }
+            set
+            {
+                nickname = value;
+                RaisePropertyChanged("Nickname");
+            }
+        }
+        public string Name 
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                RaisePropertyChanged("Name");
+            }
+        }
+        public string Description 
+        {
+            get { return description; }
+            set
+            {
+                description = value;
+                RaisePropertyChanged("Description");
+            }
+        }
+
         public ImageSource ProfileImage { get; set; }
 
 
@@ -35,15 +65,31 @@ namespace ProfileBook.ViewModels
             Title = "New Profile";
         }
 
-        public ICommand Add => new Command(async () =>
+        public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            _profileService.SaveProfile(new Profile
+            profile = parameters.GetValue<Profile>("profile");
+            if (profile != null)
             {
-                Nickname = this.Nickname,
-                Name = this.Name,
-                Description = this.Description,
-                UserId = _settingsManager.AuthorizedUserID
-            });
+                Nickname = profile.Nickname;
+                Name = profile.Name;
+                Description = profile.Description;
+            }
+        }
+
+        public ICommand Save => new Command(async () =>
+        {
+            if (profile == null)
+            {
+                profile = new Profile
+                {
+                    UserId = _settingsManager.AuthorizedUserID,
+                    Date = DateTime.Now
+                };
+            }
+            profile.Nickname = this.Nickname;
+            profile.Name = this.Name;
+            profile.Description = this.Description;
+            _profileService.SaveProfile(profile);
             await NavigationService.NavigateAsync("/NavigationPage/MainPage");
         });
 
@@ -55,7 +101,7 @@ namespace ProfileBook.ViewModels
                 {
                     SaveToAlbum = true,
                     Directory = "Sample",
-                    Name = $"{DateTime.Now.ToString("dd.MM.yyyy_hh.mm.ss")}.jpg"
+                    Name = $"{DateTime.Now:dd.MM.yyyy_hh.mm.ss}.jpg"
                 });
 
                 if (file == null)
