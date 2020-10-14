@@ -14,7 +14,9 @@ namespace ProfileBook.Views
         {
             if (loginInput.Text != null && passwordFirstInput.Text != null && passwordSecondInput.Text != null)
             {
-                if (loginInput.Text.Length > 0 && passwordFirstInput.Text.Length > 0 && passwordSecondInput.Text.Length > 0)
+                if (loginInput.Text.Length > 0 && 
+                    passwordFirstInput.Text.Length > 0 &&  //needs rework, make constants
+                    passwordSecondInput.Text.Length > 0)
                 {
                     signUpButton.IsEnabled = true;
                 }

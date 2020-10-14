@@ -1,10 +1,5 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Navigation;
+﻿using Prism.Navigation;
 using ProfileBook.Services.Authorization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -46,7 +41,9 @@ namespace ProfileBook.ViewModels
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Oops...", "Wrong credentials", "cancel");
+                await Application.Current.MainPage.DisplayAlert("Oops...", "Wrong credentials", "Cancel");
+                Password = string.Empty;
+                RaisePropertyChanged("Password");
             }
         });
 

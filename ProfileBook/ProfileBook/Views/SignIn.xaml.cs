@@ -14,7 +14,7 @@ namespace ProfileBook.Views
         {
             if (loginInput.Text != null && passwordInput.Text != null)
             {
-                if (loginInput.Text.Length > 0 && passwordInput.Text.Length > 0)
+                if (loginInput.Text.Length > 0 && passwordInput.Text.Length > 0) //set to constants after autologin implemented
                 {
                     signInButton.IsEnabled = true;
                 }

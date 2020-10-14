@@ -1,14 +1,6 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Navigation;
+﻿using Prism.Navigation;
 using ProfileBook.Enums;
-using ProfileBook.Models;
 using ProfileBook.Services.Registration;
-using ProfileBook.Services.Repository;
-using SQLitePCL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 

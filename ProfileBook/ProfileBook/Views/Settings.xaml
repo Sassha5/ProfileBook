@@ -19,15 +19,15 @@
         <StackLayout Grid.Row="0" Grid.RowSpan="2">
             <Label Text="Sorting" FontAttributes="Bold"/>
             <StackLayout Orientation="Horizontal">
-                <RadioButton x:Name="buttonName" IsChecked="{Binding Path=ButtonNameIsChecked, Mode=TwoWay}"/>
+                <RadioButton x:Name="buttonName" IsChecked="{Binding Path=ButtonNameIsChecked, Mode=TwoWay}" GroupName="sorting"/>
                 <Label Text="Name" VerticalOptions="Center"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal">
-                <RadioButton IsChecked="{Binding Path=ButtonNicknameIsChecked, Mode=TwoWay}" />
+                <RadioButton IsChecked="{Binding Path=ButtonNicknameIsChecked, Mode=TwoWay}" GroupName="sorting"/>
                 <Label Text="Nickname" VerticalOptions="Center"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal">
-                <RadioButton IsChecked="{Binding Path=ButtonDateIsChecked, Mode=TwoWay}"/>
+                <RadioButton IsChecked="{Binding Path=ButtonDateIsChecked, Mode=TwoWay}" GroupName="sorting"/>
                 <Label Text="Date" VerticalOptions="Center"/>
             </StackLayout>
         </StackLayout>

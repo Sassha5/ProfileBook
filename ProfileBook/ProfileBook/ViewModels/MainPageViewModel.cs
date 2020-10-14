@@ -1,15 +1,10 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Navigation;
+﻿using Prism.Navigation;
 using ProfileBook.Enums;
 using ProfileBook.Models;
 using ProfileBook.Services.ProfileService;
 using ProfileBook.Services.Settings;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -79,7 +74,7 @@ namespace ProfileBook.ViewModels
 
         public ICommand Logout => new Command(async () =>
         {
-            _settingsManager.AuthorizedUserID = -1;
+            _settingsManager.AuthorizedUserID = Constants.NoAuthorizedUser;
             await NavigationService.NavigateAsync("/NavigationPage/SignIn");
         });
 

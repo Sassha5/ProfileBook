@@ -1,9 +1,7 @@
 ﻿using ProfileBook.Models;
 using ProfileBook.Services.Repository;
 using SQLite;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ProfileBook.Services.ProfileService
 {

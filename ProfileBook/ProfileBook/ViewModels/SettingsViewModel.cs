@@ -1,11 +1,6 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Navigation;
+﻿using Prism.Navigation;
 using ProfileBook.Enums;
 using ProfileBook.Services.Settings;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ProfileBook.ViewModels
 {
@@ -16,26 +11,36 @@ namespace ProfileBook.ViewModels
         private bool buttonNicknameIsChecked;
         private bool buttonDateIsChecked;
 
+        #region Properties
         public bool ButtonNameIsChecked
         {
             get { return buttonNameIsChecked; }
-            set 
+            set
             {
                 buttonNameIsChecked = value;
-                _settingsManager.SortingType = (int)Sorting.Name; 
+                if (value == true) _settingsManager.SortingType = (int)Sorting.Name;
             }
         }
 
         public bool ButtonNicknameIsChecked
         {
             get { return buttonNicknameIsChecked; }
-            set { _settingsManager.SortingType = (int)Sorting.Nickname; }
+            set
+            {
+                buttonNicknameIsChecked = value;
+                if (value == true) _settingsManager.SortingType = (int)Sorting.Nickname;
+            }
         }
         public bool ButtonDateIsChecked
         {
             get { return buttonDateIsChecked; }
-            set { _settingsManager.SortingType = (int)Sorting.Date; }
+            set
+            {
+                buttonDateIsChecked = value;
+                if (value == true) _settingsManager.SortingType = (int)Sorting.Date;
+            }
         }
+        #endregion
 
         public SettingsViewModel(INavigationService navigationService, ISettingsManager settingsManager)
             : base(navigationService)
@@ -46,9 +51,22 @@ namespace ProfileBook.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            if (_settingsManager.SortingType == (int)Sorting.Name)
+            switch (_settingsManager.SortingType)
             {
-                ButtonNameIsChecked = true; //why not checking in view?
+                case (int)Sorting.Name:
+                    ButtonNameIsChecked = true;
+                    RaisePropertyChanged("ButtonNameIsChecked");
+                    break;
+                case (int)Sorting.Nickname:
+                    ButtonNicknameIsChecked = true;
+                    RaisePropertyChanged("ButtonNicknameIsChecked");
+                    break;
+                case (int)Sorting.Date:
+                    ButtonDateIsChecked = true;
+                    RaisePropertyChanged("ButtonDateIsChecked");
+                    break;
+                default:
+                    break;
             }
         }
     }

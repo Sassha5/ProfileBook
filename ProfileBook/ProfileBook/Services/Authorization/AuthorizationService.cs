@@ -1,9 +1,6 @@
 ﻿using ProfileBook.Services.Repository;
 using ProfileBook.Services.Settings;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ProfileBook.Services.Authorization
 {
@@ -30,7 +27,7 @@ namespace ProfileBook.Services.Authorization
 
         public bool CheckAuthorized()
         {
-            return _settingsManager.AuthorizedUserID != -1;
+            return _settingsManager.AuthorizedUserID != Constants.NoAuthorizedUser;
         }
     }
 }
