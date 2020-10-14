@@ -17,6 +17,8 @@ namespace ProfileBook.Droid
 
             base.OnCreate(savedInstanceState);
 
+            Xamarin.Forms.Forms.SetFlags("RadioButton_Experimental");
+
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App(new AndroidInitializer()));
         }

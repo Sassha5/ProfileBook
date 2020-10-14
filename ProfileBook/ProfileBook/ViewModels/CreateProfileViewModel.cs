@@ -23,7 +23,9 @@ namespace ProfileBook.ViewModels
         private string nickname;
         private string name;
         private string description;
+        private string imagePath;
 
+        #region Properties
         public string Nickname 
         {
             get { return nickname; }
@@ -52,8 +54,15 @@ namespace ProfileBook.ViewModels
             }
         }
 
-        public ImageSource ProfileImage { get; set; }
-
+        public string ImagePath { 
+            get { return imagePath; }
+            set
+            {
+                imagePath = value;
+                RaisePropertyChanged("Description");
+            }
+        }
+        #endregion
 
         public CreateProfileViewModel(INavigationService navigationService,
             IProfileService profileService,
@@ -62,6 +71,7 @@ namespace ProfileBook.ViewModels
         {
             _profileService = profileService;
             _settingsManager = settingsManager;
+            ImagePath = "pic_profile.png";
             Title = "New Profile";
         }
 
@@ -107,7 +117,7 @@ namespace ProfileBook.ViewModels
                 if (file == null)
                     return;
 
-                ProfileImage = ImageSource.FromFile(file.Path);
+                ImagePath = file.Path;
             }
             //if (CrossMedia.Current.IsPickPhotoSupported)
             //{

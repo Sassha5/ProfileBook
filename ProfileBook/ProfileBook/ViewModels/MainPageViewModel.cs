@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using ProfileBook.Enums;
 using ProfileBook.Models;
 using ProfileBook.Services.ProfileService;
 using ProfileBook.Services.Settings;
@@ -50,6 +51,20 @@ namespace ProfileBook.ViewModels
             {
                 Profiles.Add(profile);
             }
+            switch (_settingsManager.SortingType)
+            {
+                case (int)Sorting.Date:
+                    Profiles = new ObservableCollection<Profile>(Profiles.OrderBy(x => x.Date).ToList());
+                    break;
+                case (int)Sorting.Name:
+                    Profiles = new ObservableCollection<Profile>(Profiles.OrderBy(x => x.Name).ToList());
+                    break;
+                case (int)Sorting.Nickname:
+                    Profiles = new ObservableCollection<Profile>(Profiles.OrderBy(x => x.Nickname).ToList());
+                    break;
+                default:
+                    break;
+            }
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
@@ -81,11 +96,15 @@ namespace ProfileBook.ViewModels
             await NavigationService.NavigateAsync("CreateProfile", navParams);
         });
 
-        public ICommand Delete => new Command((object arg) =>
+        public ICommand Delete => new Command(async (object arg) =>
         {
-            Profile profile = arg as Profile;
-            _profileService.DeleteProfile(profile.Id);
-            UpdateCollection();
+            bool result = await Application.Current.MainPage.DisplayAlert("", "Sure?", "Sure","Nope");
+            if (result)
+            {
+                Profile profile = arg as Profile;
+                _profileService.DeleteProfile(profile.Id);
+                UpdateCollection();
+            }
         });
     }
 }

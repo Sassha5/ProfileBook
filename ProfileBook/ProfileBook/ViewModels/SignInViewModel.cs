@@ -25,6 +25,13 @@ namespace ProfileBook.ViewModels
             _authorizationService = authorizationService;
         }
 
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            //if (_authorizationService.CheckAuthorized())              todo autologin
+            //{
+            //    ToMainPage();
+            //}
+        }
 
         public ICommand ClickCommand => new Command(async () =>
         {
@@ -35,12 +42,17 @@ namespace ProfileBook.ViewModels
         {
             if (_authorizationService.Authorize(Login, Password))
             {
-                await NavigationService.NavigateAsync("/NavigationPage/MainPage");
+                ToMainPage();
             }
             else
             {
                 await Application.Current.MainPage.DisplayAlert("Oops...", "Wrong credentials", "cancel");
             }
         });
+
+        private async void ToMainPage()
+        {
+            await NavigationService.NavigateAsync("/NavigationPage/MainPage");
+        }
     }
 }

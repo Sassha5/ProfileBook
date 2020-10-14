@@ -1,4 +1,5 @@
 ﻿using Plugin.Settings.Abstractions;
+using ProfileBook.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,6 +18,11 @@ namespace ProfileBook.Services.Settings
         {
             get => _appSettings.GetValueOrDefault(nameof(AuthorizedUserID), -1);
             set => _appSettings.AddOrUpdateValue(nameof(AuthorizedUserID), value);
+        }
+        public int SortingType 
+        {
+            get => _appSettings.GetValueOrDefault(nameof(SortingType), (int)Sorting.Date);
+            set => _appSettings.AddOrUpdateValue(nameof(SortingType), value);
         }
     }
 }

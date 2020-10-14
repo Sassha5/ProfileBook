@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using ProfileBook.Enums;
 using ProfileBook.Models;
 using ProfileBook.Services.Registration;
 using ProfileBook.Services.Repository;
@@ -16,7 +17,6 @@ namespace ProfileBook.ViewModels
     public class SignUpViewModel : ViewModelBase
     {
         private readonly IRegistrationService _registrationService;
-        private readonly IRepository _repository;
 
         public string Login { get; set; }
         public string Password { get; set; }
@@ -24,25 +24,48 @@ namespace ProfileBook.ViewModels
 
 
         public SignUpViewModel(INavigationService navigationService,
-            IRegistrationService registrationService,
-            IRepository repository)
+            IRegistrationService registrationService)
             : base(navigationService)
         {
-            _repository = repository;
             _registrationService = registrationService;
             Title = "Sign Up";
         }
 
         public ICommand Register => new Command(async () =>
         {
-            if (!_repository.FindUser(Login) && Password.Equals(ConfirmPassword))
+            switch (_registrationService.Validate(Login, Password, ConfirmPassword))
             {
-                _registrationService.Register(Login, Password);
-                await NavigationService.NavigateAsync("/NavigationPage/MainPage");
-            }
-            else
-            {
-                await Application.Current.MainPage.DisplayAlert("Oops...", "Something goes not as planned...", "cancel");
+                case Status.LoginIsTaken:
+                    await Application.Current.MainPage.DisplayAlert("Oops...", "Looks like someone already took this login", "Damn...");
+                    break;
+                case Status.LoginIsTooLong:
+                    await Application.Current.MainPage.DisplayAlert("Oh my...", "You've got such a long login...", ";)");
+                    break;
+                case Status.LoginIsTooShort:
+                    await Application.Current.MainPage.DisplayAlert("Oops...", "Add few more letters, login is too short", "Ok");
+                    break;
+                case Status.LoginStartsWithNumber:
+                    await Application.Current.MainPage.DisplayAlert("No.", "Do not start login with a number. I dont like it.", "Damn...");
+                    break;
+                case Status.PasswordIsTooLong:
+                    await Application.Current.MainPage.DisplayAlert("What?!", "Why is there a limit on a pass length? Idk", "Lol");
+                    break;
+                case Status.PasswordIsTooShort:
+                    await Application.Current.MainPage.DisplayAlert("Bro...", "I know that size don't matter, but this is too short of a pass", ":(");
+                    break;
+                case Status.PasswordIsWeak:
+                    await Application.Current.MainPage.DisplayAlert("Stronga!", "Your pass is weak! Better start lifting.", "Sure");
+                    break;
+                case Status.PasswordsAreNotEqual:
+                    await Application.Current.MainPage.DisplayAlert("Hey", "You are supposed to enter the same pass in both fields", "Ah... Thanks!");
+                    break;
+                case Status.Success:
+                    _registrationService.Register(Login, Password);
+                    await NavigationService.NavigateAsync("/NavigationPage/MainPage");
+                    break;
+                default:
+                    await Application.Current.MainPage.DisplayAlert("Oops...", "Unknown Status Code", "Damn...");
+                    break;
             }
         });
     }
