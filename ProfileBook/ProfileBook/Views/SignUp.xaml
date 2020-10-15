@@ -4,7 +4,8 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ProfileBook.Views.SignUp"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             Style="{StaticResource ContentPageStyle}">
     <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -19,23 +20,27 @@
             <Entry x:Name="loginInput" 
                    Placeholder="Login" 
                    Text="{Binding Path=Login, Mode=TwoWay}" 
+                   Style="{StaticResource EntryStyle}"
                    TextChanged="TextChanged"
                    Grid.Row="0"/>
             <Entry x:Name="passwordFirstInput" 
                    Placeholder="Password" 
                    Text="{Binding Path=Password, Mode=TwoWay}" 
+                   Style="{StaticResource EntryStyle}"
                    TextChanged="TextChanged"
                    IsPassword="True" 
                    Grid.Row="1" />
             <Entry x:Name="passwordSecondInput" 
                    Placeholder="Confirm Password" 
                    Text="{Binding Path=ConfirmPassword, Mode=TwoWay}" 
+                   Style="{StaticResource EntryStyle}"
                    TextChanged="TextChanged"
                    IsPassword="True" 
                    Grid.Row="2"/>
             <Button x:Name="signUpButton" 
                     Text="Sign Up" 
                     Grid.Row="7"
-                    Command="{Binding Register}"/>
+                    Command="{Binding Register}"
+                    Style="{StaticResource ButtonStyle}"/>
         </Grid>
 </ContentPage>

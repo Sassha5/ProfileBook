@@ -23,9 +23,11 @@ namespace ProfileBook
 
         protected override async void OnInitialized()
         {
+            Device.SetFlags(new string[] { "AppTheme_Experimental", "RadioButton_Experimental" });
             InitializeComponent();
 
             await NavigationService.NavigateAsync("NavigationPage/SignIn");
+            //OSAppTheme currentTheme = Application.Current.RequestedTheme;
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

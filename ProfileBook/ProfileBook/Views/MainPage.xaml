@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProfileBook.Views.MainPage"
              Title="{Binding Title}"
-             x:Name="profilesPage">
+             x:Name="profilesPage"
+             Style="{StaticResource ContentPageStyle}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Primary"
                  Priority="1"
@@ -19,7 +20,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ListView ItemsSource="{Binding Profiles}" RowHeight="100">
+        <ListView ItemsSource="{Binding Profiles}" RowHeight="100" Margin="10">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell Height="100">
@@ -29,10 +30,10 @@
                         </ViewCell.ContextActions>
                         <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                             <Image Source="pic_profile.png" Aspect="AspectFit" />
-                            <StackLayout VerticalOptions="Center">
-                                <Label Text="{Binding Nickname}" FontAttributes="Bold"/>
-                                <Label Text="{Binding Name}"/>
-                                <Label Text="{Binding Date}"/>
+                            <StackLayout VerticalOptions="Center" Margin="10,0,0,0">
+                                <Label Text="{Binding Nickname}" FontAttributes="Bold" Style="{StaticResource SmallLabelStyle}"/>
+                                <Label Text="{Binding Name}" Style="{StaticResource SmallLabelStyle}"/>
+                                <Label Text="{Binding Date}" Style="{StaticResource SmallLabelStyle}"/>
                             </StackLayout>
                         </StackLayout>
                     </ViewCell>
@@ -42,9 +43,9 @@
 
         <Button Grid.Row="0" 
                 ImageSource="ic_add.png"
-                BackgroundColor="DeepSkyBlue" 
-                BorderRadius="35" 
-                TextColor="White" 
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightNavigationBarColor}, 
+                                            Dark={StaticResource DarkNavigationBarColor}}" 
+                BorderRadius="35"
                 HorizontalOptions="End" 
                 Margin="0,0,20,22" 
                 VerticalOptions="End" 

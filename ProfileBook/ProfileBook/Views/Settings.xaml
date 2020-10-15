@@ -4,7 +4,8 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ProfileBook.Views.Settings"
-             Title="{Binding Title}">
+             Title="{Binding Title}" 
+             Style="{StaticResource ContentPageStyle}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -17,23 +18,42 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackLayout Grid.Row="0" Grid.RowSpan="2">
-            <Label Text="Sorting" FontAttributes="Bold"/>
+            <Label Text="Sorting" FontAttributes="Bold" Style="{StaticResource MediumLabelStyle}"/>
             <StackLayout Orientation="Horizontal">
-                <RadioButton x:Name="buttonName" IsChecked="{Binding Path=ButtonNameIsChecked, Mode=TwoWay}" GroupName="sorting"/>
-                <Label Text="Name" VerticalOptions="Center"/>
+                <RadioButton 
+                             IsChecked="{Binding Path=ButtonNameIsChecked, Mode=TwoWay}" 
+                             GroupName="sorting"/>
+                <Label 
+                    Text="Name" 
+                    VerticalOptions="Center"
+                    Style="{StaticResource SmallLabelStyle}"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal">
-                <RadioButton IsChecked="{Binding Path=ButtonNicknameIsChecked, Mode=TwoWay}" GroupName="sorting"/>
-                <Label Text="Nickname" VerticalOptions="Center"/>
+                <RadioButton 
+                    IsChecked="{Binding Path=ButtonNicknameIsChecked, Mode=TwoWay}" 
+                    GroupName="sorting"/>
+                <Label 
+                    Text="Nickname" 
+                    VerticalOptions="Center"
+                    Style="{StaticResource SmallLabelStyle}"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal">
-                <RadioButton IsChecked="{Binding Path=ButtonDateIsChecked, Mode=TwoWay}" GroupName="sorting"/>
-                <Label Text="Date" VerticalOptions="Center"/>
+                <RadioButton 
+                    IsChecked="{Binding Path=ButtonDateIsChecked, Mode=TwoWay}" 
+                    GroupName="sorting"/>
+                <Label 
+                    Text="Date"
+                    VerticalOptions="Center"
+                    Style="{StaticResource SmallLabelStyle}"/>
             </StackLayout>
         </StackLayout>
         <StackLayout Orientation="Horizontal" Grid.Row="2">
-            <Label Text="Dark Theme" FontAttributes="Bold" VerticalOptions="Center"/>
-            <CheckBox />
+            <Label 
+                Text="Dark Theme" 
+                FontAttributes="Bold"
+                VerticalOptions="Center"
+                Style="{StaticResource MediumLabelStyle}"/>
+            <CheckBox IsChecked="{Binding Path=DarkThemeIsChecked, Mode=TwoWay}"/>
         </StackLayout>
         <Picker Grid.Row="3"/>
     </Grid>

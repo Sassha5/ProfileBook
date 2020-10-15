@@ -4,7 +4,8 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ProfileBook.Views.CreateProfile"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             Style="{StaticResource ContentPageStyle}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Primary"
                  Priority="0"
@@ -26,21 +27,25 @@
                      Source="{Binding Path=ImagePath, Mode=TwoWay}"
                      Command="{Binding ChooseImage}"
                      Grid.Row="0"
-                     Grid.RowSpan="2"/>
+                     Grid.RowSpan="2"
+                     Style="{StaticResource ImageButtonStyle}"
+                     BackgroundColor="Transparent"/>
         <Entry x:Name="nicknameInput" 
-                   Placeholder="Nickname" 
+                   Placeholder="Nickname"
                    Text="{Binding Path=Nickname, Mode=TwoWay}" 
+                   Style="{StaticResource EntryStyle}"
                    Grid.Row="3"/>
         <Entry x:Name="nameInput" 
                    Placeholder="Name" 
                    Text="{Binding Path=Name, Mode=TwoWay}" 
+                   Style="{StaticResource EntryStyle}"
                    Grid.Row="4" />
         <Editor x:Name="descriptionInput"
                     Placeholder="Description"
                     Text="{Binding Path=Description, Mode=TwoWay}"
+                    Style="{StaticResource EntryStyle}"
                     MaxLength="120"
                     Grid.Row="5"
-                    Grid.RowSpan="3"
-                    BackgroundColor="LightGray"/>
+                    Grid.RowSpan="3"/>
     </Grid>
 </ContentPage>

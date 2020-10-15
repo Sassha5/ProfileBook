@@ -1,6 +1,7 @@
 ﻿using Prism.Navigation;
 using ProfileBook.Enums;
 using ProfileBook.Services.Settings;
+using Xamarin.Forms;
 
 namespace ProfileBook.ViewModels
 {
@@ -10,6 +11,7 @@ namespace ProfileBook.ViewModels
         private bool buttonNameIsChecked;
         private bool buttonNicknameIsChecked;
         private bool buttonDateIsChecked;
+        private bool darkThemeIsChecked;
 
         #region Properties
         public bool ButtonNameIsChecked
@@ -21,7 +23,6 @@ namespace ProfileBook.ViewModels
                 if (value == true) _settingsManager.SortingType = (int)Sorting.Name;
             }
         }
-
         public bool ButtonNicknameIsChecked
         {
             get { return buttonNicknameIsChecked; }
@@ -38,6 +39,16 @@ namespace ProfileBook.ViewModels
             {
                 buttonDateIsChecked = value;
                 if (value == true) _settingsManager.SortingType = (int)Sorting.Date;
+            }
+        }
+        public bool DarkThemeIsChecked 
+        { 
+            get { return darkThemeIsChecked; }
+            set
+            {
+                darkThemeIsChecked = value;
+                if (value == true) App.Current.UserAppTheme = OSAppTheme.Dark;
+                else App.Current.UserAppTheme = OSAppTheme.Light;
             }
         }
         #endregion
