@@ -6,7 +6,7 @@
              x:Class="ProfileBook.Views.Settings"
              Title="{Binding Title}" 
              Style="{StaticResource ContentPageStyle}">
-    <Grid>
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -55,6 +55,13 @@
                 Style="{StaticResource MediumLabelStyle}"/>
             <CheckBox IsChecked="{Binding Path=DarkThemeIsChecked, Mode=TwoWay}"/>
         </StackLayout>
-        <Picker Grid.Row="3"/>
+        <StackLayout Grid.Row="3">
+            <Label Text="Language" FontAttributes="Bold" Style="{StaticResource MediumLabelStyle}"/>
+            <Picker
+                TextColor="{AppThemeBinding Light={StaticResource LightPrimaryTextColor}, 
+                                            Dark={StaticResource DarkPrimaryTextColor}}"
+                ItemsSource="{Binding Path=PickerLanguages, Mode=TwoWay}"
+                SelectedItem="{Binding Path=SelectedLanguage, Mode=TwoWay}"/>
+        </StackLayout>
     </Grid>
 </ContentPage>

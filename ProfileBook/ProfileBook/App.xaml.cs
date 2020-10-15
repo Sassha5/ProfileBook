@@ -27,7 +27,6 @@ namespace ProfileBook
             InitializeComponent();
 
             await NavigationService.NavigateAsync("NavigationPage/SignIn");
-            //OSAppTheme currentTheme = Application.Current.RequestedTheme;
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

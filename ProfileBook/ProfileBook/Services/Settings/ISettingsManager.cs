@@ -4,5 +4,6 @@
     {
         int AuthorizedUserID { get; set; }
         int SortingType { get; set; }
+        int Theme { get; set; }
     }
 }

@@ -41,16 +41,18 @@ namespace ProfileBook.ViewModels
                 if (value == true) _settingsManager.SortingType = (int)Sorting.Date;
             }
         }
-        public bool DarkThemeIsChecked 
-        { 
+        public bool DarkThemeIsChecked
+        {
             get { return darkThemeIsChecked; }
             set
             {
                 darkThemeIsChecked = value;
-                if (value == true) App.Current.UserAppTheme = OSAppTheme.Dark;
-                else App.Current.UserAppTheme = OSAppTheme.Light;
+                if (value == true) _settingsManager.Theme = (int)OSAppTheme.Dark;
+                else _settingsManager.Theme = (int)OSAppTheme.Light;
             }
         }
+        public string[] PickerLanguages { get; set; }
+        public int SelectedLanguage { get; set; }
         #endregion
 
         public SettingsViewModel(INavigationService navigationService, ISettingsManager settingsManager)
@@ -79,6 +81,15 @@ namespace ProfileBook.ViewModels
                 default:
                     break;
             }
+
+            if (Application.Current.RequestedTheme == OSAppTheme.Dark)
+            {
+                DarkThemeIsChecked = true;
+                RaisePropertyChanged("DarkThemeIsChecked");
+            }
+
+            PickerLanguages = System.Enum.GetNames(typeof(Languages));
+            RaisePropertyChanged("PickerLanguages");
         }
     }
 }
