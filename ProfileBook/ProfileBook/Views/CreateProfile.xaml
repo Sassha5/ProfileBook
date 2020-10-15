@@ -24,11 +24,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <ImageButton x:Name="profileImage"
-                     Source="{Binding Path=ImagePath, Mode=TwoWay}"
+                     Source="{Binding Path=ImageSource, Mode=TwoWay}"
                      Command="{Binding ChooseImage}"
                      Grid.Row="0"
-                     Grid.RowSpan="2"
+                     Grid.RowSpan="3"
                      Style="{StaticResource ImageButtonStyle}"
+                     Margin="20"
                      BackgroundColor="Transparent"/>
         <Entry x:Name="nicknameInput" 
                    Placeholder="Nickname"

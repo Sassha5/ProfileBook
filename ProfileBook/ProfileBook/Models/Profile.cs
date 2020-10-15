@@ -1,7 +1,7 @@
 ﻿using SQLite;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
+using Xamarin.Forms;
 
 namespace ProfileBook.Models
 {
@@ -16,5 +16,15 @@ namespace ProfileBook.Models
         public string Description { get; set; }
         public DateTime Date { get; set; }
         public int UserId { get; set; }
+        public byte[] ImageData { get; set; }
+        [Ignore]
+        public ImageSource ImageSource
+        {
+            get 
+            {
+                if (ImageData != null) return ImageSource.FromStream(() => new MemoryStream(ImageData));
+                else return ImageSource.FromFile(Constants.DefaultProfileImage);
+            }
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace ProfileBook
         public const string DATABASE_NAME = "users.db";
         public const int DefaultSorting = (int)Sorting.Date;
         public const int NoAuthorizedUser = -1;
+        public const string DefaultProfileImage = "pic_profile.png";
     }
 }
