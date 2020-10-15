@@ -26,7 +26,7 @@ namespace ProfileBook
             Device.SetFlags(new string[] { "AppTheme_Experimental", "RadioButton_Experimental" });
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/SignIn");
+            await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignIn)}");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

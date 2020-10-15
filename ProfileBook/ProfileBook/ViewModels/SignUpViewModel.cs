@@ -1,6 +1,7 @@
 ﻿using Prism.Navigation;
 using ProfileBook.Enums;
 using ProfileBook.Services.Registration;
+using ProfileBook.Views;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -53,7 +54,7 @@ namespace ProfileBook.ViewModels
                     break;
                 case Status.Success:
                     _registrationService.Register(Login, Password);
-                    await NavigationService.NavigateAsync("/NavigationPage/MainPage");
+                    await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainPage)}");
                     break;
                 default:
                     await Application.Current.MainPage.DisplayAlert("Oops...", "Unknown Status Code", "Damn...");

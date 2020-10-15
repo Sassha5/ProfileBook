@@ -7,6 +7,8 @@ namespace ProfileBook.Services.ProfileService
     {
         IEnumerable<Profile> GetProfiles();
 
+        IEnumerable<Profile> GetUserProfiles(int userId);
+
         Profile GetProfile(int id);
 
         int DeleteProfile(int id);

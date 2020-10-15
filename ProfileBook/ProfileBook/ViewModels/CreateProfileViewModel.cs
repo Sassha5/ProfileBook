@@ -96,7 +96,7 @@ namespace ProfileBook.ViewModels
             profile.Name = this.Name;
             profile.Description = this.Description;
             _profileService.SaveProfile(profile);
-            await NavigationService.NavigateAsync("/NavigationPage/MainPage");
+            await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(Views.MainPage)}");
         });
 
         public ICommand ChooseImage => new Command(async () =>

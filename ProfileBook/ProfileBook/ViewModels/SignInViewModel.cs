@@ -1,5 +1,6 @@
 ﻿using Prism.Navigation;
 using ProfileBook.Services.Authorization;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -22,22 +23,22 @@ namespace ProfileBook.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            //if (_authorizationService.CheckAuthorized())              todo autologin
-            //{
-            //    ToMainPage();
-            //}
+            if (_authorizationService.CheckAuthorized())
+            {
+                Device.BeginInvokeOnMainThread(async () => await ToMainPage());
+            }
         }
 
-        public ICommand ClickCommand => new Command(async () =>
+        public ICommand SignUp => new Command(async () =>
         {
-            await NavigationService.NavigateAsync("SignUp");
+            await NavigationService.NavigateAsync($"{nameof(Views.SignUp)}");
         });
 
         public ICommand Authorize => new Command(async () =>
         {
             if (_authorizationService.Authorize(Login, Password))
             {
-                ToMainPage();
+                await ToMainPage();
             }
             else
             {
@@ -47,9 +48,9 @@ namespace ProfileBook.ViewModels
             }
         });
 
-        private async void ToMainPage()
+        private async Task<INavigationResult> ToMainPage()
         {
-            await NavigationService.NavigateAsync("/NavigationPage/MainPage");
+            return await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(Views.MainPage)}");
         }
     }
 }

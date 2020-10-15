@@ -2,6 +2,7 @@
 using ProfileBook.Services.Repository;
 using SQLite;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ProfileBook.Services.ProfileService
 {
@@ -41,6 +42,11 @@ namespace ProfileBook.Services.ProfileService
             {
                 return database.Insert(item);
             }
+        }
+
+        public IEnumerable<Profile> GetUserProfiles(int userId)
+        {
+            return database.Table<Profile>().ToList().Where(x => x.UserId == userId);
         }
     }
 }

@@ -46,7 +46,7 @@
                             TextColor="Blue"
                             TextDecorations="Underline">
                         <Span.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ClickCommand}"/>
+                            <TapGestureRecognizer Command="{Binding SignUp}"/>
                         </Span.GestureRecognizers>
                     </Span>
                 </FormattedString>

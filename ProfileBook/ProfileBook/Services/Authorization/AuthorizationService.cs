@@ -19,6 +19,7 @@ namespace ProfileBook.Services.Authorization
             var user = _repository.GetUsers().FirstOrDefault(x => x.Login == login && x.Password == password);
             if (user != null)
             {
+                //App.Current.Properties.Add("CurrentUser", user.Id);
                 _settingsManager.AuthorizedUserID = user.Id;
                 return true;
             }
