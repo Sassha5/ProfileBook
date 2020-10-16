@@ -35,8 +35,8 @@ namespace ProfileBook.Services.Registration
             if (char.IsDigit(login[0])) return Status.LoginStartsWithNumber;
             if (password.Length > Constants.MaxPasswordLength) return Status.PasswordIsTooLong;
             if (password.Length < Constants.MinPasswordLength) return Status.PasswordIsTooShort;
-            Regex regex = new Regex(@"(?=^.{8,16}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$");
-            //"(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" another regex to try
+            Regex regex = new Regex(@"(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"); //"(?=^.{8,16}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$"
+            //why the hell is this regex not working
             if (regex.IsMatch(password)) return Status.PasswordIsWeak; //not working right
             if (!password.Equals(confirmPassword)) return Status.PasswordsAreNotEqual;
 

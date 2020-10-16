@@ -41,7 +41,11 @@
                             <MenuItem Text="Delete" Command="{Binding Path=BindingContext.Delete, Source={x:Reference profilesPage}}" CommandParameter="{Binding .}"/>
                         </ViewCell.ContextActions>
                         <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                            <Image Source="{Binding ImagePath}" Aspect="AspectFit" Margin="5"/>
+                            <Image Source="{Binding ImagePath}" Aspect="AspectFit" Margin="5">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.OnImageSelected, Source={x:Reference profilesPage}}" CommandParameter="{Binding .}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
                             <StackLayout VerticalOptions="Center" Margin="10,0,0,0">
                                 <Label Text="{Binding Nickname}" FontAttributes="Bold" Style="{StaticResource SmallLabelStyle}"/>
                                 <Label Text="{Binding Name}" Style="{StaticResource SmallLabelStyle}"/>

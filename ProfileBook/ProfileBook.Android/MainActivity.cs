@@ -16,6 +16,7 @@ namespace ProfileBook.Droid
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
             UserDialogs.Init(this);
+            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             base.OnCreate(savedInstanceState);
 
 

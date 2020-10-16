@@ -1,8 +1,10 @@
 ﻿using Prism.Navigation;
 using ProfileBook.Enums;
 using ProfileBook.Models;
+using ProfileBook.Pop_ups;
 using ProfileBook.Services.ProfileService;
 using ProfileBook.Services.Settings;
+using Rg.Plugins.Popup.Services;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
@@ -106,6 +108,11 @@ namespace ProfileBook.ViewModels
                 _profileService.DeleteProfile(profile.Id);
                 UpdateCollection();
             }
+        });
+
+        public ICommand OnImageSelected => new Command(async (object arg) =>
+        {
+            await PopupNavigation.Instance.PushAsync(new ListImagePopup((arg as Profile).ImagePath));
         });
     }
 }
