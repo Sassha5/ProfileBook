@@ -61,8 +61,12 @@ namespace ProfileBook.ViewModels
 
         public ICommand Logout => new Command(async () =>
         {
-            _settingsManager.AuthorizedUserID = Constants.NoAuthorizedUser;
-            await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(Views.SignIn)}");
+            bool result = await Application.Current.MainPage.DisplayAlert("", "Sure?", "Sure", "Nope");
+            if (result)
+            {
+                _settingsManager.AuthorizedUserID = Constants.NoAuthorizedUser;
+                await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(Views.SignIn)}");
+            }
         });
 
         public ICommand Settings => new Command(async () =>
@@ -80,7 +84,7 @@ namespace ProfileBook.ViewModels
 
         public ICommand Delete => new Command(async (object arg) =>
         {
-            bool result = await Application.Current.MainPage.DisplayAlert("", "Sure?", "Sure","Nope");
+            bool result = await Application.Current.MainPage.DisplayAlert("", "Sure?", "Sure", "Nope");
             if (result)
             {
                 Profile profile = arg as Profile;

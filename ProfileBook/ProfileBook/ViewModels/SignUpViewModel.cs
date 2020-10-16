@@ -54,6 +54,7 @@ namespace ProfileBook.ViewModels
                     break;
                 case Status.Success:
                     _registrationService.Register(Login, Password);
+                    await Application.Current.MainPage.DisplayAlert("Congratulations!", "Redirecting to the main page...", "Finaly...");
                     await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainPage)}");
                     break;
                 default:

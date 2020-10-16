@@ -9,17 +9,17 @@
 
         <!-- Light colors -->
         <Color x:Key="LightBackgroundColor">White</Color>
-        <Color x:Key="LightNavigationBarColor">#336699</Color>
-        <Color x:Key="LightPrimaryColor">#CCCCCC</Color>
+        <Color x:Key="LightNavigationBarColor">#419fd9</Color>
+        <Color x:Key="LightPrimaryColor">#419fd9</Color>
         <!--<Color x:Key="LightSecondaryColor">Black</Color>-->
         <Color x:Key="LightPrimaryTextColor">Black</Color>
         <Color x:Key="LightSecondaryTextColor">White</Color>
         <Color x:Key="LightTertiaryTextColor">Gray</Color>
 
         <!-- Dark colors -->
-        <Color x:Key="DarkBackgroundColor">#222831</Color>
-        <Color x:Key="DarkNavigationBarColor">#336699</Color>
-        <Color x:Key="DarkPrimaryColor">#393e46</Color>
+        <Color x:Key="DarkBackgroundColor">#18191d</Color>
+        <Color x:Key="DarkNavigationBarColor">#2b5279</Color>
+        <Color x:Key="DarkPrimaryColor">#292e34</Color>
         <!--<Color x:Key="DarkSecondaryColor">White</Color>-->
         <Color x:Key="DarkPrimaryTextColor">White</Color>
         <Color x:Key="DarkSecondaryTextColor">Black</Color>
@@ -32,6 +32,8 @@
             <Setter Property="BarTextColor"
                     Value="{AppThemeBinding Light={StaticResource LightSecondaryTextColor}, 
                                             Dark={StaticResource DarkPrimaryTextColor}}" />
+            <Setter Property="BackgroundColor"
+                    Value="Transparent"/>
         </Style>
 
         <Style x:Key="ContentPageStyle"
@@ -39,6 +41,8 @@
             <Setter Property="BackgroundColor"
                     Value="{AppThemeBinding Light={StaticResource LightBackgroundColor}, 
                                             Dark={StaticResource DarkBackgroundColor} }"/>
+            <Setter Property="Padding"
+                    Value="5,0,5,0"/>
         </Style>
 
         <Style x:Key="ButtonStyle"

@@ -5,7 +5,6 @@ using ProfileBook.Models;
 using ProfileBook.Services.ProfileService;
 using ProfileBook.Services.Settings;
 using System;
-using System.IO;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -20,8 +19,7 @@ namespace ProfileBook.ViewModels
         private string nickname;
         private string name;
         private string description;
-        private ImageSource imageSource;
-        private MediaFile image;
+        private string imageSource;
 
         #region Properties
         public string Nickname 
@@ -51,8 +49,7 @@ namespace ProfileBook.ViewModels
                 RaisePropertyChanged("Description");
             }
         }
-
-        public ImageSource ImageSource { 
+        public string ImageSource { 
             get { return imageSource; }
             set
             {
@@ -76,18 +73,14 @@ namespace ProfileBook.ViewModels
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             profile = parameters.GetValue<Profile>("profile");
-            if (profile != null)
+            if (profile != null)  //true when navigated from edit button
             {
                 Nickname = profile.Nickname;
                 Name = profile.Name;
                 Description = profile.Description;
-                ImageSource = profile.ImageSource;
+                ImageSource = profile.ImagePath;
             }
-        }
-
-        public ICommand Save => new Command(async () =>
-        {
-            if (profile == null)
+            else
             {
                 profile = new Profile
                 {
@@ -95,48 +88,38 @@ namespace ProfileBook.ViewModels
                     Date = DateTime.Now
                 };
             }
-            if (image != null)
-            {
-                byte[] byteImage = MediaFileToByteArray(image);
-                profile.ImageData = byteImage;
-            }
+        }
+
+        public ICommand Save => new Command(async () =>
+        {
             profile.Nickname = this.Nickname;
             profile.Name = this.Name;
             profile.Description = this.Description;
+            profile.ImagePath = ImageSource;
             _profileService.SaveProfile(profile);
             await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(Views.MainPage)}");
         });
-
-        private byte[] MediaFileToByteArray(MediaFile image)
-        {
-            using (var memoryStream = new MemoryStream())
-            {
-                image.GetStream().CopyTo(memoryStream);
-                image.Dispose();
-                return memoryStream.ToArray();
-            }
-        }
 
         public ICommand ChooseImage => new Command(async () =>
         {
             //if (CrossMedia.Current.IsCameraAvailable && CrossMedia.Current.IsTakePhotoSupported)
             //{
-            //    MediaFile file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+            //    image = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
             //    {
             //        SaveToAlbum = true,
             //        Directory = "Sample",
             //        Name = $"{DateTime.Now:dd.MM.yyyy_hh.mm.ss}.jpg"
             //    });
 
-            //    if (file == null)
+            //    if (image == null)
             //        return;
 
-            //    ImagePath = file.Path;
+            //    ImageSource = image.Path;
             //}
 
             if (CrossMedia.Current.IsPickPhotoSupported)
             {
-                image = await CrossMedia.Current.PickPhotoAsync();
+                MediaFile image = await CrossMedia.Current.PickPhotoAsync();
                 ImageSource = image.Path;
             }
         });

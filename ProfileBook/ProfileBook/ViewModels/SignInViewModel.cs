@@ -1,5 +1,7 @@
-﻿using Prism.Navigation;
+﻿using Plugin.Settings.Abstractions;
+using Prism.Navigation;
 using ProfileBook.Services.Authorization;
+using ProfileBook.Services.Settings;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -9,23 +11,28 @@ namespace ProfileBook.ViewModels
     public class SignInViewModel : ViewModelBase
     {
         private readonly IAuthorizationService _authorizationService;
+        private readonly ISettingsManager _settingsManager;
 
         public string Login { get; set; }
         public string Password { get; set; }
 
         public SignInViewModel(INavigationService navigationService,
-            IAuthorizationService authorizationService)
+            IAuthorizationService authorizationService,
+            ISettingsManager settingsManager)
             : base(navigationService)
         {
             Title = "Sign In";
             _authorizationService = authorizationService;
+            _settingsManager = settingsManager;
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
+            Application.Current.UserAppTheme = (OSAppTheme)_settingsManager.Theme; //setting theme to previous session theme
+
             if (_authorizationService.CheckAuthorized())
             {
-                Device.BeginInvokeOnMainThread(async () => await ToMainPage());
+                Device.BeginInvokeOnMainThread(async () => await ToMainPage()); //must be a better way
             }
         }
 
