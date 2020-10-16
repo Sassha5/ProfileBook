@@ -3,10 +3,11 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     x:Class="ProfileBook.Pop_ups.ListImagePopup"
     xmlns:popups="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup">
+    
     <StackLayout HorizontalOptions="CenterAndExpand" 
           VerticalOptions="CenterAndExpand"
           Margin="20"
-          BackgroundColor="Gray"
+          BackgroundColor="Transparent"
                  HeightRequest="300"
                  WidthRequest="300">
         <Image x:Name="ImageView" 

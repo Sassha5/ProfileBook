@@ -43,7 +43,6 @@
             <Label.FormattedText>
                 <FormattedString>
                     <Span Text="Sign Up"
-                            TextColor="Blue"
                             TextDecorations="Underline">
                         <Span.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SignUp}"/>

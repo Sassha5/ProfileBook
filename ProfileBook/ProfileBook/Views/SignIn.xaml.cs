@@ -12,15 +12,7 @@ namespace ProfileBook.Views
 
         private void TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (loginInput.Text != null && passwordInput.Text != null)
-            {
-                if (loginInput.Text.Length > 0 && passwordInput.Text.Length > 0) //set to constants after autologin implemented
-                {
-                    signInButton.IsEnabled = true;
-                }
-                else signInButton.IsEnabled = false;
-            }
-            else signInButton.IsEnabled = false;
+            signInButton.IsEnabled = loginInput.Text != null && passwordInput.Text != null;
         }
     }
 }
