@@ -108,7 +108,7 @@ namespace ProfileBook.ViewModels
                             { Cancel = new ActionSheetOption("Cancel") }
                             .SetTitle("Choose Type")
                             .Add("Gallery", () => PickFromGallery(), null)
-                            .Add("Camera", null, null)
+                            .Add("Camera", () => TakePhoto(), null)
                         );
         });
 
@@ -127,8 +127,6 @@ namespace ProfileBook.ViewModels
             {
                 MediaFile image = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
                 {
-                    SaveToAlbum = true,
-                    Directory = "Sample",
                     Name = $"{DateTime.Now:dd.MM.yyyy_hh.mm.ss}.jpg"
                 });
 
