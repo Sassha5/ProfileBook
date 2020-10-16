@@ -20,6 +20,18 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
+        <Label Text="List is empty yet!" 
+               Style="{StaticResource LargeLabelStyle}"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               IsVisible="{Binding LabelIsVisible, Mode=TwoWay}"/>
+        <Label Text="Start adding -->" 
+               Style="{StaticResource LargeLabelStyle}"
+               HorizontalOptions="Center"
+               VerticalOptions="End"
+               Margin="0,0,0,40"
+               IsVisible="{Binding LabelIsVisible, Mode=TwoWay}"/>
+
         <ListView ItemsSource="{Binding Profiles}" RowHeight="100" Margin="10">
             <ListView.ItemTemplate>
                 <DataTemplate>
