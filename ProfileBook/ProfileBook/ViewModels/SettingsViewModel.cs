@@ -68,15 +68,15 @@ namespace ProfileBook.ViewModels
             {
                 case (int)Sorting.Name:
                     ButtonNameIsChecked = true;
-                    RaisePropertyChanged("ButtonNameIsChecked");
+                    RaisePropertyChanged($"{nameof(ButtonNameIsChecked)}");
                     break;
                 case (int)Sorting.Nickname:
                     ButtonNicknameIsChecked = true;
-                    RaisePropertyChanged("ButtonNicknameIsChecked");
+                    RaisePropertyChanged($"{nameof(ButtonNicknameIsChecked)}");
                     break;
                 case (int)Sorting.Date:
                     ButtonDateIsChecked = true;
-                    RaisePropertyChanged("ButtonDateIsChecked");
+                    RaisePropertyChanged($"{nameof(ButtonDateIsChecked)}");
                     break;
                 default:
                     break;
@@ -85,11 +85,11 @@ namespace ProfileBook.ViewModels
             if (Application.Current.RequestedTheme == OSAppTheme.Dark)
             {
                 DarkThemeIsChecked = true;
-                RaisePropertyChanged("DarkThemeIsChecked");
+                RaisePropertyChanged($"{nameof(DarkThemeIsChecked)}");
             }
 
             PickerLanguages = System.Enum.GetNames(typeof(Languages));
-            RaisePropertyChanged("PickerLanguages");
+            RaisePropertyChanged($"{nameof(PickerLanguages)}");
         }
     }
 }

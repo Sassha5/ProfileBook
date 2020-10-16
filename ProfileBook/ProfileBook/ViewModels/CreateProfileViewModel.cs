@@ -1,4 +1,5 @@
-﻿using Plugin.Media;
+﻿using Acr.UserDialogs;
+using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Prism.Navigation;
 using ProfileBook.Models;
@@ -22,39 +23,40 @@ namespace ProfileBook.ViewModels
         private string imageSource;
 
         #region Properties
-        public string Nickname 
+        public string Nickname
         {
             get { return nickname; }
             set
             {
                 nickname = value;
-                RaisePropertyChanged("Nickname");
+                RaisePropertyChanged($"{nameof(Nickname)}");
             }
         }
-        public string Name 
+        public string Name
         {
             get { return name; }
             set
             {
                 name = value;
-                RaisePropertyChanged("Name");
+                RaisePropertyChanged($"{nameof(Name)}");
             }
         }
-        public string Description 
+        public string Description
         {
             get { return description; }
             set
             {
                 description = value;
-                RaisePropertyChanged("Description");
+                RaisePropertyChanged($"{nameof(Description)}");
             }
         }
-        public string ImageSource { 
+        public string ImageSource
+        {
             get { return imageSource; }
             set
             {
                 imageSource = value;
-                RaisePropertyChanged("ImageSource");
+                RaisePropertyChanged($"{nameof(ImageSource)}");
             }
         }
         #endregion
@@ -100,28 +102,41 @@ namespace ProfileBook.ViewModels
             await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(Views.MainPage)}");
         });
 
-        public ICommand ChooseImage => new Command(async () =>
+        public ICommand ChooseImage => new Command(() =>
         {
-            //if (CrossMedia.Current.IsCameraAvailable && CrossMedia.Current.IsTakePhotoSupported)
-            //{
-            //    image = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
-            //    {
-            //        SaveToAlbum = true,
-            //        Directory = "Sample",
-            //        Name = $"{DateTime.Now:dd.MM.yyyy_hh.mm.ss}.jpg"
-            //    });
+            UserDialogs.Instance.ActionSheet(new ActionSheetConfig() 
+                            { Cancel = new ActionSheetOption("Cancel") }
+                            .SetTitle("Choose Type")
+                            .Add("Gallery", () => PickFromGallery(), null)
+                            .Add("Camera", null, null)
+                        );
+        });
 
-            //    if (image == null)
-            //        return;
-
-            //    ImageSource = image.Path;
-            //}
-
+        private async void PickFromGallery()
+        {
             if (CrossMedia.Current.IsPickPhotoSupported)
             {
                 MediaFile image = await CrossMedia.Current.PickPhotoAsync();
                 ImageSource = image.Path;
             }
-        });
+        }
+
+        private async void TakePhoto()
+        {
+            if (CrossMedia.Current.IsCameraAvailable && CrossMedia.Current.IsTakePhotoSupported)
+            {
+                MediaFile image = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+                {
+                    SaveToAlbum = true,
+                    Directory = "Sample",
+                    Name = $"{DateTime.Now:dd.MM.yyyy_hh.mm.ss}.jpg"
+                });
+
+                if (image == null)
+                    return;
+
+                ImageSource = image.Path;
+            }
+        }
     }
 }

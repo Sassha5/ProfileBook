@@ -51,7 +51,7 @@ namespace ProfileBook.ViewModels
             {
                 await Application.Current.MainPage.DisplayAlert("Oops...", "Wrong credentials", "Cancel");
                 Password = string.Empty;
-                RaisePropertyChanged("Password");
+                RaisePropertyChanged($"{nameof(Password)}");
             }
         });
 
