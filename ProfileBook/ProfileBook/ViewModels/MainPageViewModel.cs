@@ -45,24 +45,8 @@ namespace ProfileBook.ViewModels
 
         private void UpdateCollection()
         {
-            var profiles = _profileService.GetUserProfiles(_settingsManager.AuthorizedUserID);
-
-            LabelIsVisible = profiles.Count() == 0; //check label visibility
-
-            switch (_settingsManager.SortingType)
-            {
-                case (int)Sorting.Date:
-                    Profiles = new ObservableCollection<Profile>(profiles.OrderBy(x => x.Date).ToList());
-                    break;
-                case (int)Sorting.Name:
-                    Profiles = new ObservableCollection<Profile>(profiles.OrderBy(x => x.Name).ToList());
-                    break;
-                case (int)Sorting.Nickname:
-                    Profiles = new ObservableCollection<Profile>(profiles.OrderBy(x => x.Nickname).ToList());
-                    break;
-                default:
-                    break;
-            }
+            Profiles = new ObservableCollection<Profile>(_profileService.GetCurrentUserSortedProfiles());
+            LabelIsVisible = Profiles.Count() == 0;             //true is collection is empty
             RaisePropertyChanged($"{nameof(Profiles)}");
         }
 
@@ -78,8 +62,7 @@ namespace ProfileBook.ViewModels
 
         public ICommand Logout => new Command(async () =>
         {
-            bool result = await Application.Current.MainPage.DisplayAlert("", "Sure?", "Yup", "Nope");
-            if (result)
+            if (await Application.Current.MainPage.DisplayAlert("", "Sure?", "Yup", "Nope"))
             {
                 _settingsManager.AuthorizedUserID = Constants.NoAuthorizedUser;
                 await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(Views.SignIn)}");
@@ -93,19 +76,16 @@ namespace ProfileBook.ViewModels
 
         public ICommand Edit => new Command(async (object arg) =>
         {
-            Profile profile = arg as Profile;
             NavigationParameters navParams = new NavigationParameters();
-            navParams.Add("profile", profile);
+            navParams.Add("profile", arg as Profile);
             await NavigationService.NavigateAsync($"{nameof(CreateProfile)}", navParams);
         });
 
         public ICommand Delete => new Command(async (object arg) =>
         {
-            bool result = await Application.Current.MainPage.DisplayAlert("", "Sure?", "Yup", "Nope");
-            if (result)
+            if (await Application.Current.MainPage.DisplayAlert("", "Sure?", "Yup", "Nope"))
             {
-                Profile profile = arg as Profile;
-                _profileService.DeleteProfile(profile.Id);
+                _profileService.DeleteProfile((arg as Profile).Id);
                 UpdateCollection();
             }
         });

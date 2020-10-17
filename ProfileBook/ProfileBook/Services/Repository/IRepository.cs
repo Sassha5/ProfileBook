@@ -4,13 +4,12 @@ using System.Collections.Generic;
 
 namespace ProfileBook.Services.Repository
 {
-    public interface IRepository
+    public interface IRepository<T> where T : class, new()
     {
-        SQLiteConnection database { get; set; }
-        IEnumerable<User> GetUsers();
-        User GetUser(int id);
-        int DeleteUser(int id);
-        int SaveUser(User item);
-        bool FindUser(string login);
+        IEnumerable<T> GetItems();
+        T GetItem(int id);
+        int DeleteItem(int id);
+        int InsertItem(T item);
+        int UpdateItem(T item);
     }
 }

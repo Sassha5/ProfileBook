@@ -11,6 +11,7 @@ using ProfileBook.Services.Repository;
 using ProfileBook.Services.ProfileService;
 using ProfileBook.Services.Settings;
 using Plugin.Settings;
+using ProfileBook.Models;
 
 namespace ProfileBook
 {
@@ -42,7 +43,8 @@ namespace ProfileBook
 
             containerRegistry.RegisterInstance(CrossSettings.Current);
             containerRegistry.RegisterInstance<ISettingsManager>(Container.Resolve<SettingsManager>());
-            containerRegistry.RegisterInstance<IRepository>(Container.Resolve<Repository>());
+            containerRegistry.RegisterInstance<IRepository<User>>(Container.Resolve<Repository<User>>());
+            containerRegistry.RegisterInstance<IRepository<Profile>>(Container.Resolve<Repository<Profile>>());
             containerRegistry.RegisterInstance<IProfileService>(Container.Resolve<ProfileService>());
             containerRegistry.RegisterInstance<IAuthorizationService>(Container.Resolve<AuthorizationService>());
             containerRegistry.RegisterInstance<IRegistrationService>(Container.Resolve<RegistrationService>());

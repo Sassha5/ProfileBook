@@ -28,11 +28,18 @@ namespace ProfileBook.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
+            string login = parameters.GetValue<string>($"{nameof(Login)}");
+            if (login != null) //true when navigated from Sign Up
+            {
+                Login = login;
+                RaisePropertyChanged($"{nameof(Login)}");
+            }
+
             Application.Current.UserAppTheme = (OSAppTheme)_settingsManager.Theme; //setting theme to previous session theme
 
             if (_authorizationService.CheckAuthorized())
             {
-                Device.BeginInvokeOnMainThread(async () => await ToMainPage()); //must be a better way
+                Device.BeginInvokeOnMainThread(async () => await ToMainPage()); //is it legal?
             }
         }
 

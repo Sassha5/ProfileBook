@@ -2,19 +2,18 @@
 using ProfileBook.Models;
 using ProfileBook.Services.Repository;
 using ProfileBook.Services.Settings;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace ProfileBook.Services.Registration
 {
     class RegistrationService : IRegistrationService
     {
-        private readonly IRepository _repository;
-        private readonly ISettingsManager _settingsManager;
+        private readonly IRepository<User> _repository;
 
-        public RegistrationService(IRepository repository, ISettingsManager settingsManager)
+        public RegistrationService(IRepository<User> repository)
         {
             _repository = repository;
-            _settingsManager = settingsManager;
         }
         public void Register(string login, string password)
         {
@@ -23,13 +22,12 @@ namespace ProfileBook.Services.Registration
                 Login = login,
                 Password = password
             };
-            _settingsManager.AuthorizedUserID = user.Id;
-            _repository.SaveUser(user);
+            _repository.InsertItem(user);
         }
 
         public Status Validate(string login, string password, string confirmPassword)
         {
-            if (_repository.FindUser(login) == true) return Status.LoginIsTaken;
+            if (TryFindUser(login)) return Status.LoginIsTaken;
             if (login.Length > Constants.MaxLoginLength) return Status.LoginIsTooLong;
             if (login.Length < Constants.MinLoginLength) return Status.LoginIsTooShort;
             if (char.IsDigit(login[0])) return Status.LoginStartsWithNumber;
@@ -48,6 +46,12 @@ namespace ProfileBook.Services.Registration
             var hasLowerChar = new Regex(@"[a-z]+");
 
             return hasNumber.IsMatch(pass) && hasUpperChar.IsMatch(pass) && hasLowerChar.IsMatch(pass);
+        }
+
+        private bool TryFindUser(string login)
+        {
+            User user = _repository.GetItems().Where(x => x.Login == login).FirstOrDefault();
+            return user != null;
         }
     }
 }

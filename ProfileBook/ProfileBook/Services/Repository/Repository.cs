@@ -6,54 +6,39 @@ using System.IO;
 
 namespace ProfileBook.Services.Repository
 {
-    public class Repository : IRepository
+    public class Repository<T> : IRepository<T> where T : class, new()
     {
-        public SQLiteConnection database { get; set; }
+        private readonly SQLiteConnection database;
 
         public Repository()
         {
             database = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Constants.DATABASE_NAME));
-            database.CreateTable<User>();
+            database.CreateTable<T>();
         }
 
-        public bool FindUser(string login)
+        public IEnumerable<T> GetItems()
         {
-            var t = database.Table<User>().Where(x => x.Login == login).FirstOrDefault();
-            if (t != null)
-            {
-                return true;
-            }
-            else
-                return false;
+            return database.Table<T>().ToList();
         }
 
-        public IEnumerable<User> GetUsers()
+        public T GetItem(int id)
         {
-            return database.Table<User>().ToList();
+            return database.Get<T>(id);
         }
 
-        public User GetUser(int id)
+        public int DeleteItem(int id)
         {
-            return database.Get<User>(id);
+            return database.Delete<T>(id);
         }
 
-        public int DeleteUser(int id)
+        public int InsertItem(T item)
         {
-            return database.Delete<User>(id);
+            return database.Insert(item);
         }
 
-        public int SaveUser(User item)
+        public int UpdateItem(T item)
         {
-            if (item.Id != 0)
-            {
-                database.Update(item);
-                return item.Id;
-            }
-            else
-            {
-                return database.Insert(item);
-            }
+            return database.Update(item);
         }
-
     }
 }

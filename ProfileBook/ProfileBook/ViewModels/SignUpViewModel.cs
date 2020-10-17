@@ -32,7 +32,7 @@ namespace ProfileBook.ViewModels
                     await Application.Current.MainPage.DisplayAlert("Oops...", "Looks like someone already took this login", "Damn...");
                     break;
                 case Status.LoginIsTooLong:
-                    await Application.Current.MainPage.DisplayAlert("Oh my...", "You've got such a long login...", ";)");
+                    await Application.Current.MainPage.DisplayAlert("Oh my...", "Sorry, I can't take such a long login...", ";)");
                     break;
                 case Status.LoginIsTooShort:
                     await Application.Current.MainPage.DisplayAlert("Oops...", "Add few more letters, login is too short", "Ok");
@@ -44,23 +44,30 @@ namespace ProfileBook.ViewModels
                     await Application.Current.MainPage.DisplayAlert("What?!", "Why is there a limit on a pass length? Idk", "Lol");
                     break;
                 case Status.PasswordIsTooShort:
-                    await Application.Current.MainPage.DisplayAlert("Bro...", "I know that size don't matter, but this is too short of a pass", ":(");
+                    await Application.Current.MainPage.DisplayAlert("Bro...", "I know that size doesn't matter, but this is too short of a pass", ":(");
                     break;
                 case Status.PasswordIsWeak:
-                    await Application.Current.MainPage.DisplayAlert("Stronga!", "Your pass is weak! Better start lifting.", "Sure");
+                    await Application.Current.MainPage.DisplayAlert("Stronga!", "Your pass is weak! Use numbers, upper and lower case.", "Sure");
                     break;
                 case Status.PasswordsAreNotEqual:
                     await Application.Current.MainPage.DisplayAlert("Hey", "You are supposed to enter the same pass in both fields", "Ah... Thanks!");
                     break;
                 case Status.Success:
-                    _registrationService.Register(Login, Password);
-                    await Application.Current.MainPage.DisplayAlert("Congratulations!", "Redirecting to the main page...", "Finaly...");
-                    await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainPage)}");
+                    await Application.Current.MainPage.DisplayAlert("Congratulations!", "Redirecting to the sign in page...", "Finaly...");
+                    RegistrationSuccess();
                     break;
                 default:
                     await Application.Current.MainPage.DisplayAlert("Oops...", "Unknown Status Code", "Damn...");
                     break;
             }
         });
+
+        private async void RegistrationSuccess()
+        {
+            _registrationService.Register(Login, Password);
+            NavigationParameters navParams = new NavigationParameters();
+            navParams.Add($"{nameof(Login)}", Login);
+            await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignIn)}", navParams);
+        }
     }
 }

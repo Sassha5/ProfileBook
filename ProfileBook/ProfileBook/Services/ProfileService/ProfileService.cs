@@ -1,6 +1,7 @@
-﻿using ProfileBook.Models;
+﻿using ProfileBook.Enums;
+using ProfileBook.Models;
 using ProfileBook.Services.Repository;
-using SQLite;
+using ProfileBook.Services.Settings;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,45 +9,61 @@ namespace ProfileBook.Services.ProfileService
 {
     class ProfileService : IProfileService
     {
-        private SQLiteConnection database;
+        private readonly IRepository<Profile> _repository;
+        private readonly ISettingsManager _settingsManager;
 
-        public ProfileService(IRepository repository)
+        public ProfileService(IRepository<Profile> repository, ISettingsManager settingsManager)
         {
-            database = repository.database;
-            database.CreateTable<Profile>();
+            _repository = repository;
+            _settingsManager = settingsManager;
         }
 
-        public IEnumerable<Profile> GetProfiles()
+        public IEnumerable<Profile> GetCurrentUserProfiles()
         {
-            return database.Table<Profile>().ToList();
+            return _repository.GetItems().Where(x => x.UserId == _settingsManager.AuthorizedUserID).ToList();
+        }
+
+        public IEnumerable<Profile> GetCurrentUserSortedProfiles()
+        {
+            IEnumerable<Profile> profiles = GetCurrentUserProfiles();
+            switch (_settingsManager.SortingType)
+            {
+                case (int)Sorting.Date:
+                    profiles = profiles.OrderBy(x => x.Date).ToList();
+                    break;
+                case (int)Sorting.Name:
+                    profiles = profiles.OrderBy(x => x.Name).ToList();
+                    break;
+                case (int)Sorting.Nickname:
+                    profiles = profiles.OrderBy(x => x.Nickname).ToList();
+                    break;
+                default:
+                    break;
+            }
+            return profiles;
         }
 
         public Profile GetProfile(int id)
         {
-            return database.Get<Profile>(id);
+            return _repository.GetItem(id);
         }
 
         public int DeleteProfile(int id)
         {
-            return database.Delete<Profile>(id);
+            return _repository.DeleteItem(id);
         }
 
         public int SaveProfile(Profile item)
         {
             if (item.Id != 0)
             {
-                database.Update(item);
+                _repository.UpdateItem(item);
                 return item.Id;
             }
             else
             {
-                return database.Insert(item);
+                return _repository.InsertItem(item);
             }
-        }
-
-        public IEnumerable<Profile> GetUserProfiles(int userId)
-        {
-            return database.Table<Profile>().ToList().Where(x => x.UserId == userId);
         }
     }
 }
