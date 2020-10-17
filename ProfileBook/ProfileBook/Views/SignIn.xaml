@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:resources="clr-namespace:ProfileBook.Resources"
              x:Class="ProfileBook.Views.SignIn"
-             Title="{Binding Title}"
+             Title="{x:Static resources:AppResource.SignIn}"
              Style="{StaticResource ContentPageStyle}">
     <Grid>
         <Grid.RowDefinitions>
@@ -19,14 +20,14 @@
         </Grid.RowDefinitions>
         <Entry x:Name="loginInput" 
                    Style="{StaticResource EntryStyle}"
-                   Placeholder="Login" 
+                   Placeholder="{x:Static resources:AppResource.Login}" 
                    Text="{Binding Path=Login, Mode=TwoWay}"
                    TextChanged="TextChanged"
                    ClearButtonVisibility="WhileEditing"
                    Grid.Row="0"/>
         <Entry x:Name="passwordInput" 
                    Style="{StaticResource EntryStyle}"
-                   Placeholder="Password" 
+                   Placeholder="{x:Static resources:AppResource.Password}" 
                    Text="{Binding Path=Password, Mode=TwoWay}" 
                    TextChanged="TextChanged"
                    ClearButtonVisibility="WhileEditing"
@@ -34,7 +35,7 @@
                    Grid.Row="1" />
         <Button x:Name="signInButton" 
                     Style="{StaticResource ButtonStyle}"
-                    Text="Sign In" 
+                    Text="{x:Static resources:AppResource.SignIn}" 
                     Grid.Row="6"
                     Command="{Binding Authorize}"/>
         <Label HorizontalOptions="Center"
@@ -42,7 +43,7 @@
                Style="{StaticResource MediumLabelStyle}">
             <Label.FormattedText>
                 <FormattedString>
-                    <Span Text="Sign Up"
+                    <Span Text="{x:Static resources:AppResource.SignUp}"
                             TextDecorations="Underline">
                         <Span.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SignUp}"/>

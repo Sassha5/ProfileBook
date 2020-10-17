@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ProfileBook.Services.Repository
 {
-    public interface IRepository<T> where T : class, new()
+    public interface IRepository<T> where T : BaseModel, new()
     {
         IEnumerable<T> GetItems();
         T GetItem(int id);

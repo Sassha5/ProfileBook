@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:resources="clr-namespace:ProfileBook.Resources"
              x:Class="ProfileBook.Views.CreateProfile"
-             Title="{Binding Title}"
+             Title="{x:Static resources:AppResource.CreateProfile}"
              Style="{StaticResource ContentPageStyle}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Primary"
@@ -32,17 +33,17 @@
                      Margin="20"
                      BackgroundColor="Transparent"/>
         <Entry x:Name="nicknameInput" 
-                   Placeholder="Nickname"
+                   Placeholder="{x:Static resources:AppResource.Nickname}"
                    Text="{Binding Path=Nickname, Mode=TwoWay}" 
                    Style="{StaticResource EntryStyle}"
                    Grid.Row="3"/>
         <Entry x:Name="nameInput" 
-                   Placeholder="Name" 
+                   Placeholder="{x:Static resources:AppResource.Name}" 
                    Text="{Binding Path=Name, Mode=TwoWay}" 
                    Style="{StaticResource EntryStyle}"
                    Grid.Row="4" />
         <Editor x:Name="descriptionInput"
-                    Placeholder="Description"
+                    Placeholder="{x:Static resources:AppResource.Description}"
                     Text="{Binding Path=Description, Mode=TwoWay}"
                     Style="{StaticResource EntryStyle}"
                     MaxLength="120"

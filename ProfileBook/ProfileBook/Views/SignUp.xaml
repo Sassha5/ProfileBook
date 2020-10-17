@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:resources="clr-namespace:ProfileBook.Resources"
              x:Class="ProfileBook.Views.SignUp"
              Title="{Binding Title}"
              Style="{StaticResource ContentPageStyle}">
@@ -18,27 +19,27 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Entry x:Name="loginInput" 
-                   Placeholder="Login" 
+                   Placeholder="{x:Static resources:AppResource.Login}" 
                    Text="{Binding Path=Login, Mode=TwoWay}" 
                    Style="{StaticResource EntryStyle}"
                    TextChanged="TextChanged"
                    Grid.Row="0"/>
             <Entry x:Name="passwordFirstInput" 
-                   Placeholder="Password" 
+                   Placeholder="{x:Static resources:AppResource.Password}" 
                    Text="{Binding Path=Password, Mode=TwoWay}" 
                    Style="{StaticResource EntryStyle}"
                    TextChanged="TextChanged"
                    IsPassword="True" 
                    Grid.Row="1" />
             <Entry x:Name="passwordSecondInput" 
-                   Placeholder="Confirm Password" 
+                   Placeholder="{x:Static resources:AppResource.ConfirmPassword}" 
                    Text="{Binding Path=ConfirmPassword, Mode=TwoWay}" 
                    Style="{StaticResource EntryStyle}"
                    TextChanged="TextChanged"
                    IsPassword="True" 
                    Grid.Row="2"/>
             <Button x:Name="signUpButton" 
-                    Text="Sign Up" 
+                    Text="{x:Static resources:AppResource.SignUp}" 
                     Grid.Row="7"
                     Command="{Binding Register}"
                     Style="{StaticResource ButtonStyle}"/>

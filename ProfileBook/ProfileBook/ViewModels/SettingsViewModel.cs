@@ -1,6 +1,8 @@
 ﻿using Prism.Navigation;
 using ProfileBook.Enums;
+using ProfileBook.Resources;
 using ProfileBook.Services.Settings;
+using System.Globalization;
 using Xamarin.Forms;
 
 namespace ProfileBook.ViewModels
@@ -12,6 +14,7 @@ namespace ProfileBook.ViewModels
         private bool buttonNicknameIsChecked;
         private bool buttonDateIsChecked;
         private bool darkThemeIsChecked;
+        private int selectedLanguageIndex;
 
         #region Properties
         public bool ButtonNameIsChecked
@@ -52,7 +55,14 @@ namespace ProfileBook.ViewModels
             }
         }
         public string[] PickerLanguages { get; set; }
-        public int SelectedLanguage { get; set; }
+        public int SelectedLanguage 
+        {
+            get { return selectedLanguageIndex; }
+            set 
+            { 
+                selectedLanguageIndex = value;
+            } 
+        }
         #endregion
 
         public SettingsViewModel(INavigationService navigationService, ISettingsManager settingsManager)

@@ -1,5 +1,6 @@
 ﻿using Prism.Navigation;
 using ProfileBook.Enums;
+using ProfileBook.Resources;
 using ProfileBook.Services.Registration;
 using ProfileBook.Views;
 using System.Windows.Input;
@@ -29,13 +30,13 @@ namespace ProfileBook.ViewModels
             switch (_registrationService.Validate(Login, Password, ConfirmPassword))
             {
                 case Status.LoginIsTaken:
-                    await Application.Current.MainPage.DisplayAlert("Oops...", "Looks like someone already took this login", "Damn...");
+                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, "Looks like someone already took this login", "Damn..."); ;
                     break;
                 case Status.LoginIsTooLong:
                     await Application.Current.MainPage.DisplayAlert("Oh my...", "Sorry, I can't take such a long login...", ";)");
                     break;
                 case Status.LoginIsTooShort:
-                    await Application.Current.MainPage.DisplayAlert("Oops...", "Add few more letters, login is too short", "Ok");
+                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, "Add few more letters, login is too short", "Ok");
                     break;
                 case Status.LoginStartsWithNumber:
                     await Application.Current.MainPage.DisplayAlert("No.", "Do not start login with a number. I dont like it.", "Damn...");
