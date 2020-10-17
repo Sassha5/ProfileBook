@@ -30,35 +30,35 @@ namespace ProfileBook.ViewModels
             switch (_registrationService.Validate(Login, Password, ConfirmPassword))
             {
                 case Status.LoginIsTaken:
-                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, "Looks like someone already took this login", "Damn..."); ;
+                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, AppResource.LoginIsTaken, AppResource.Damn); ;
                     break;
                 case Status.LoginIsTooLong:
-                    await Application.Current.MainPage.DisplayAlert("Oh my...", "Sorry, I can't take such a long login...", ";)");
+                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, AppResource.LoginIsTooLong, AppResource.Ok);
                     break;
                 case Status.LoginIsTooShort:
-                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, "Add few more letters, login is too short", "Ok");
+                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, AppResource.LoginIsTooShort, AppResource.Ok);
                     break;
                 case Status.LoginStartsWithNumber:
-                    await Application.Current.MainPage.DisplayAlert("No.", "Do not start login with a number. I dont like it.", "Damn...");
+                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, AppResource.LoginStartsWithNumber, AppResource.Damn);
                     break;
                 case Status.PasswordIsTooLong:
-                    await Application.Current.MainPage.DisplayAlert("What?!", "Why is there a limit on a pass length? Idk", "Lol");
+                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, AppResource.PasswordIsTooLong, AppResource.Ok);
                     break;
                 case Status.PasswordIsTooShort:
-                    await Application.Current.MainPage.DisplayAlert("Bro...", "I know that size doesn't matter, but this is too short of a pass", ":(");
+                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, AppResource.PasswordIsTooShort, AppResource.Damn);
                     break;
                 case Status.PasswordIsWeak:
-                    await Application.Current.MainPage.DisplayAlert("Stronga!", "Your pass is weak! Use numbers, upper and lower case.", "Sure");
+                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, AppResource.PasswordIsWeak, AppResource.Sure);
                     break;
                 case Status.PasswordsAreNotEqual:
-                    await Application.Current.MainPage.DisplayAlert("Hey", "You are supposed to enter the same pass in both fields", "Ah... Thanks!");
+                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, AppResource.PasswordsAreNotEqual, AppResource.Thanks);
                     break;
                 case Status.Success:
-                    await Application.Current.MainPage.DisplayAlert("Congratulations!", "Redirecting to the sign in page...", "Finaly...");
+                    await Application.Current.MainPage.DisplayAlert(AppResource.Success, AppResource.RedirectingToSignIn, AppResource.Finally);
                     RegistrationSuccess();
                     break;
                 default:
-                    await Application.Current.MainPage.DisplayAlert("Oops...", "Unknown Status Code", "Damn...");
+                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, AppResource.Unknown, AppResource.Damn);
                     break;
             }
         });

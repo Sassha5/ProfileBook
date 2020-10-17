@@ -79,6 +79,15 @@ namespace ProfileBook.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Damn....
+        /// </summary>
+        internal static string Damn {
+            get {
+                return ResourceManager.GetString("Damn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dark Theme.
         /// </summary>
         internal static string DarkTheme {
@@ -133,6 +142,15 @@ namespace ProfileBook.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Finally....
+        /// </summary>
+        internal static string Finally {
+            get {
+                return ResourceManager.GetString("Finally", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         internal static string Language {
@@ -147,6 +165,42 @@ namespace ProfileBook.Resources {
         internal static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Looks like someone already took this login.
+        /// </summary>
+        internal static string LoginIsTaken {
+            get {
+                return ResourceManager.GetString("LoginIsTaken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, I can&apos;t take such a long login....
+        /// </summary>
+        internal static string LoginIsTooLong {
+            get {
+                return ResourceManager.GetString("LoginIsTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add few more letters, login is too short.
+        /// </summary>
+        internal static string LoginIsTooShort {
+            get {
+                return ResourceManager.GetString("LoginIsTooShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do not start login with a number. I dont like it..
+        /// </summary>
+        internal static string LoginStartsWithNumber {
+            get {
+                return ResourceManager.GetString("LoginStartsWithNumber", resourceCulture);
             }
         }
         
@@ -178,6 +232,24 @@ namespace ProfileBook.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nope.
+        /// </summary>
+        internal static string Nope {
+            get {
+                return ResourceManager.GetString("Nope", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        internal static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Oops....
         /// </summary>
         internal static string Oops {
@@ -192,6 +264,51 @@ namespace ProfileBook.Resources {
         internal static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Why is there a limit on a pass length? Idk.
+        /// </summary>
+        internal static string PasswordIsTooLong {
+            get {
+                return ResourceManager.GetString("PasswordIsTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I know that size doesn&apos;t matter, but this is too short of a pass.
+        /// </summary>
+        internal static string PasswordIsTooShort {
+            get {
+                return ResourceManager.GetString("PasswordIsTooShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your pass is weak! Use numbers, upper and lower case..
+        /// </summary>
+        internal static string PasswordIsWeak {
+            get {
+                return ResourceManager.GetString("PasswordIsWeak", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are supposed to enter the same pass in both fields.
+        /// </summary>
+        internal static string PasswordsAreNotEqual {
+            get {
+                return ResourceManager.GetString("PasswordsAreNotEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Redirecting to the sign in page....
+        /// </summary>
+        internal static string RedirectingToSignIn {
+            get {
+                return ResourceManager.GetString("RedirectingToSignIn", resourceCulture);
             }
         }
         
@@ -237,6 +354,60 @@ namespace ProfileBook.Resources {
         internal static string StartAdding {
             get {
                 return ResourceManager.GetString("StartAdding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Congratulations!.
+        /// </summary>
+        internal static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sure.
+        /// </summary>
+        internal static string Sure {
+            get {
+                return ResourceManager.GetString("Sure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sure?.
+        /// </summary>
+        internal static string SureQuestion {
+            get {
+                return ResourceManager.GetString("SureQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thanks!.
+        /// </summary>
+        internal static string Thanks {
+            get {
+                return ResourceManager.GetString("Thanks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown status code.
+        /// </summary>
+        internal static string Unknown {
+            get {
+                return ResourceManager.GetString("Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yup.
+        /// </summary>
+        internal static string Yup {
+            get {
+                return ResourceManager.GetString("Yup", resourceCulture);
             }
         }
     }

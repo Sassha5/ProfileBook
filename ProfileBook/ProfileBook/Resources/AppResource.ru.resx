@@ -123,6 +123,9 @@
   <data name="CreateProfile" xml:space="preserve">
     <value>Создание профиля</value>
   </data>
+  <data name="Damn" xml:space="preserve">
+    <value>Блин...</value>
+  </data>
   <data name="DarkTheme" xml:space="preserve">
     <value>Темная тема</value>
   </data>
@@ -141,11 +144,26 @@
   <data name="EmptyList" xml:space="preserve">
     <value>Список пока ещё пуст</value>
   </data>
+  <data name="Finally" xml:space="preserve">
+    <value>Наконец-то...</value>
+  </data>
   <data name="Language" xml:space="preserve">
     <value>Язык</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Логин</value>
+  </data>
+  <data name="LoginIsTaken" xml:space="preserve">
+    <value>Кто-то успел занять этот логин быстрее</value>
+  </data>
+  <data name="LoginIsTooLong" xml:space="preserve">
+    <value>Ну поменьше логин сделай... Его ещё хранить надо...</value>
+  </data>
+  <data name="LoginIsTooShort" xml:space="preserve">
+    <value>Букв жалко чтоли? Накинь ещё парочку логину</value>
+  </data>
+  <data name="LoginStartsWithNumber" xml:space="preserve">
+    <value>Ну кто начинает логин с цифры?</value>
   </data>
   <data name="MainPage" xml:space="preserve">
     <value>Главная страница</value>
@@ -156,11 +174,32 @@
   <data name="Nickname" xml:space="preserve">
     <value>Никнейм</value>
   </data>
+  <data name="Nope" xml:space="preserve">
+    <value>Нее</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Окей</value>
+  </data>
   <data name="Oops" xml:space="preserve">
     <value>Упс...</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
+  </data>
+  <data name="PasswordIsTooLong" xml:space="preserve">
+    <value>Зачем нужно ограничение на длину пароля? Не знаю</value>
+  </data>
+  <data name="PasswordIsTooShort" xml:space="preserve">
+    <value>Это точно пароль? Какой то он короткий...</value>
+  </data>
+  <data name="PasswordIsWeak" xml:space="preserve">
+    <value>Советую использовать ВЕРХНИЙ и нижний регистр, и цифру 1</value>
+  </data>
+  <data name="PasswordsAreNotEqual" xml:space="preserve">
+    <value>Тут надо одинаковые пароли вводить в оба поля</value>
+  </data>
+  <data name="RedirectingToSignIn" xml:space="preserve">
+    <value>Перенаправляю на страницу логина...</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Настройки</value>
@@ -176,5 +215,23 @@
   </data>
   <data name="StartAdding" xml:space="preserve">
     <value>Добавить профиль --&gt;</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Успех!</value>
+  </data>
+  <data name="Sure" xml:space="preserve">
+    <value>Точно</value>
+  </data>
+  <data name="SureQuestion" xml:space="preserve">
+    <value>Точно?</value>
+  </data>
+  <data name="Thanks" xml:space="preserve">
+    <value>Спс</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Неизвестный код статуса</value>
+  </data>
+  <data name="Yup" xml:space="preserve">
+    <value>Да</value>
   </data>
 </root>

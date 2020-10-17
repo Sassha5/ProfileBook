@@ -1,7 +1,7 @@
 ﻿using Prism.Navigation;
-using ProfileBook.Enums;
 using ProfileBook.Models;
 using ProfileBook.Pop_ups;
+using ProfileBook.Resources;
 using ProfileBook.Services.ProfileService;
 using ProfileBook.Services.Settings;
 using Rg.Plugins.Popup.Services;
@@ -62,7 +62,7 @@ namespace ProfileBook.ViewModels
 
         public ICommand Logout => new Command(async () =>
         {
-            if (await Application.Current.MainPage.DisplayAlert("", "Sure?", "Yup", "Nope"))
+            if (await Confirm())
             {
                 _settingsManager.AuthorizedUserID = Constants.NoAuthorizedUser;
                 await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(Views.SignIn)}");
@@ -83,7 +83,7 @@ namespace ProfileBook.ViewModels
 
         public ICommand Delete => new Command(async (object arg) =>
         {
-            if (await Application.Current.MainPage.DisplayAlert("", "Sure?", "Yup", "Nope"))
+            if (await Confirm())
             {
                 _profileService.DeleteProfile((arg as Profile).Id);
                 UpdateCollection();
@@ -94,5 +94,10 @@ namespace ProfileBook.ViewModels
         {
             await PopupNavigation.Instance.PushAsync(new ListImagePopup((arg as Profile).ImagePath));
         });
+
+        private async System.Threading.Tasks.Task<bool> Confirm()
+        {
+            return await Application.Current.MainPage.DisplayAlert("", AppResource.SureQuestion, AppResource.Yup, AppResource.Nope);
+        }
     }
 }

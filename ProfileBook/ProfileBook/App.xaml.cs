@@ -17,7 +17,6 @@ namespace ProfileBook
 {
     public partial class App
     {
-        public static string CurrentLanguage = "en";
         public App(IPlatformInitializer initializer)
             : base(initializer)
         {
