@@ -30,5 +30,10 @@ namespace ProfileBook.Services.Settings
                 Application.Current.UserAppTheme = (OSAppTheme)value;
             }
         }
+        public string Language
+        {
+            get => _appSettings.GetValueOrDefault(nameof(Language), Constants.DefaultLanguage);
+            set => _appSettings.AddOrUpdateValue(nameof(Language), value);
+        }
     }
 }

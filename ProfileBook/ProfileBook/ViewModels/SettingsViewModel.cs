@@ -1,20 +1,19 @@
 ﻿using Prism.Navigation;
 using ProfileBook.Enums;
-using ProfileBook.Resources;
+using ProfileBook.Localization;
 using ProfileBook.Services.Settings;
-using System.Globalization;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace ProfileBook.ViewModels
 {
     public class SettingsViewModel : ViewModelBase
     {
-        private readonly ISettingsManager _settingsManager;
         private bool buttonNameIsChecked;
         private bool buttonNicknameIsChecked;
         private bool buttonDateIsChecked;
         private bool darkThemeIsChecked;
-        private int selectedLanguageIndex;
+        private string _selectedLanguage;
 
         #region Properties
         public bool ButtonNameIsChecked
@@ -23,7 +22,7 @@ namespace ProfileBook.ViewModels
             set
             {
                 buttonNameIsChecked = value;
-                if (value == true) _settingsManager.SortingType = (int)Sorting.Name;
+                if (value == true) SettingsManager.SortingType = (int)Sorting.Name;
             }
         }
         public bool ButtonNicknameIsChecked
@@ -32,7 +31,7 @@ namespace ProfileBook.ViewModels
             set
             {
                 buttonNicknameIsChecked = value;
-                if (value == true) _settingsManager.SortingType = (int)Sorting.Nickname;
+                if (value == true) SettingsManager.SortingType = (int)Sorting.Nickname;
             }
         }
         public bool ButtonDateIsChecked
@@ -41,7 +40,7 @@ namespace ProfileBook.ViewModels
             set
             {
                 buttonDateIsChecked = value;
-                if (value == true) _settingsManager.SortingType = (int)Sorting.Date;
+                if (value == true) SettingsManager.SortingType = (int)Sorting.Date;
             }
         }
         public bool DarkThemeIsChecked
@@ -50,31 +49,35 @@ namespace ProfileBook.ViewModels
             set
             {
                 darkThemeIsChecked = value;
-                if (value == true) _settingsManager.Theme = (int)OSAppTheme.Dark;
-                else _settingsManager.Theme = (int)OSAppTheme.Light;
+                if (value == true) SettingsManager.Theme = (int)OSAppTheme.Dark;
+                else SettingsManager.Theme = (int)OSAppTheme.Light;
             }
         }
-        public string[] PickerLanguages { get; set; }
-        public int SelectedLanguage 
+        public string SelectedLanguage
         {
-            get { return selectedLanguageIndex; }
-            set 
-            { 
-                selectedLanguageIndex = value;
-            } 
+            get { return _selectedLanguage; }
+            set
+            {
+                if(value != null) _selectedLanguage = value;
+                SetLanguage();
+            }
         }
+        public List<string> Languages { get; set; }
         #endregion
 
+
         public SettingsViewModel(INavigationService navigationService, ISettingsManager settingsManager)
-            : base(navigationService)
+            : base(navigationService, settingsManager)
         {
             Title = "Settings";
-            _settingsManager = settingsManager;
+            Languages = new List<string>();
+            foreach (string s in System.Enum.GetNames(typeof(Languages))) { Languages.Add(s); }
+            SelectedLanguage = SettingsManager.Language;
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            switch (_settingsManager.SortingType)
+            switch (SettingsManager.SortingType)
             {
                 case (int)Sorting.Name:
                     ButtonNameIsChecked = true;
@@ -97,9 +100,13 @@ namespace ProfileBook.ViewModels
                 DarkThemeIsChecked = true;
                 RaisePropertyChanged($"{nameof(DarkThemeIsChecked)}");
             }
+        }
 
-            PickerLanguages = System.Enum.GetNames(typeof(Languages));
-            RaisePropertyChanged($"{nameof(PickerLanguages)}");
+        private void SetLanguage()
+        {
+            SettingsManager.Language = SelectedLanguage;
+            MessagingCenter.Send<object, CultureChangedMessage>(this,
+                    string.Empty, new CultureChangedMessage(SelectedLanguage));
         }
     }
 }

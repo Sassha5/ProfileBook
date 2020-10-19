@@ -14,7 +14,6 @@ namespace ProfileBook.ViewModels
     public class CreateProfileViewModel : ViewModelBase
     {
         private readonly IProfileService _profileService;
-        private readonly ISettingsManager _settingsManager;
 
         private Profile profile;
         private string nickname;
@@ -64,10 +63,9 @@ namespace ProfileBook.ViewModels
         public CreateProfileViewModel(INavigationService navigationService,
             IProfileService profileService,
             ISettingsManager settingsManager)
-            : base(navigationService)
+            : base(navigationService, settingsManager)
         {
             _profileService = profileService;
-            _settingsManager = settingsManager;
             ImageSource = Constants.DefaultProfileImage;
             Title = "New Profile";
         }
@@ -86,7 +84,7 @@ namespace ProfileBook.ViewModels
             {
                 profile = new Profile
                 {
-                    UserId = _settingsManager.AuthorizedUserID,
+                    UserId = SettingsManager.AuthorizedUserID,
                     Date = DateTime.Now
                 };
             }

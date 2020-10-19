@@ -6,7 +6,7 @@ namespace ProfileBook.Enums
 {
     public enum Languages
     {
-        English,
-        Russian
+        EN,
+        RU
     }
 }

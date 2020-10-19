@@ -21,7 +21,6 @@ namespace ProfileBook
         private ISettingsManager _settingsManager;
         private ISettingsManager SettingsManager =>
             _settingsManager ??= Container.Resolve<ISettingsManager>();
-
         public App(IPlatformInitializer initializer)
             : base(initializer)
         {

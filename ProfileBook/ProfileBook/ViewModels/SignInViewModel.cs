@@ -1,6 +1,7 @@
 ﻿using Prism.Navigation;
 using ProfileBook.Resources;
 using ProfileBook.Services.Authorization;
+using ProfileBook.Services.Settings;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -15,8 +16,9 @@ namespace ProfileBook.ViewModels
         public string Password { get; set; }
 
         public SignInViewModel(INavigationService navigationService,
+            ISettingsManager settingsManager,
             IAuthorizationService authorizationService)
-            : base(navigationService)
+            : base(navigationService, settingsManager)
         {
             Title = "Sign In";
             _authorizationService = authorizationService;

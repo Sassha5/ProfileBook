@@ -3,6 +3,7 @@ using Prism.Navigation;
 using ProfileBook.Enums;
 using ProfileBook.Resources;
 using ProfileBook.Services.Registration;
+using ProfileBook.Services.Settings;
 using ProfileBook.Views;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -20,9 +21,10 @@ namespace ProfileBook.ViewModels
 
 
         public SignUpViewModel(INavigationService navigationService,
+            ISettingsManager settingsManager,
             IRegistrationService registrationService,
             IUserDialogs userDialogs)
-            : base(navigationService)
+            : base(navigationService, settingsManager)
         {
             _userDialogs = userDialogs;
             _registrationService = registrationService;

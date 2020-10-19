@@ -12,5 +12,6 @@ namespace ProfileBook
         public const int DefaultSorting = (int)Sorting.Date;
         public const int NoAuthorizedUser = -1;
         public const string DefaultProfileImage = "pic_profile.png";
+        public const string DefaultLanguage = "en";
     }
 }

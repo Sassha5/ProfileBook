@@ -36,7 +36,7 @@ namespace ProfileBook.ViewModels
         public MainPageViewModel(INavigationService navigationService,
             IProfileService profileService,
             ISettingsManager settingsManager)
-            : base(navigationService)
+            : base(navigationService, settingsManager)
         {
             _profileService = profileService;
             _settingsManager = settingsManager;

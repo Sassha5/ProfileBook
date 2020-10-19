@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:resources="clr-namespace:ProfileBook.Resources"
              x:Class="ProfileBook.Views.MainPage"
-             Title="{x:Static resources:AppResource.MainPage}"
+             Title="{Binding Resources[MainPage]}"
              x:Name="profilesPage"
              Style="{StaticResource ContentPageStyle}">
     <ContentPage.ToolbarItems>
@@ -21,12 +20,12 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Label Text="{x:Static resources:AppResource.EmptyList}" 
+        <Label Text="{Binding Resources[EmptyList]}" 
                Style="{StaticResource LargeLabelStyle}"
                HorizontalOptions="Center"
                VerticalOptions="Center"
                IsVisible="{Binding LabelIsVisible, Mode=TwoWay}"/>
-        <Label Text="{x:Static resources:AppResource.StartAdding}" 
+        <Label Text="{Binding Resources[StartAdding]}" 
                Style="{StaticResource LargeLabelStyle}"
                HorizontalOptions="Center"
                VerticalOptions="End"
@@ -38,11 +37,11 @@
                 <DataTemplate>
                     <ViewCell Height="100">
                         <ViewCell.ContextActions>
-                            <MenuItem Text="{x:Static resources:AppResource.Edit}" 
+                            <MenuItem Text="{Binding Resources[Edit]}" 
                                       Command="{Binding Path=BindingContext.Edit, 
                                         Source={x:Reference profilesPage}}" 
                                       CommandParameter="{Binding .}"/>
-                            <MenuItem Text="{x:Static resources:AppResource.Delete}" 
+                            <MenuItem Text="{Binding Resources[Delete]}" 
                                       Command="{Binding Path=BindingContext.Delete, 
                                         Source={x:Reference profilesPage}}" 
                                       CommandParameter="{Binding .}"/>

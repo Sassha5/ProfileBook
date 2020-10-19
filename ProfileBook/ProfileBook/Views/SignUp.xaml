@@ -3,9 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             xmlns:resources="clr-namespace:ProfileBook.Resources"
              x:Class="ProfileBook.Views.SignUp"
-             Title="{Binding Title}"
+             Title="{Binding Resources[SignUp]}"
              Style="{StaticResource ContentPageStyle}">
     <Grid>
             <Grid.RowDefinitions>
@@ -19,27 +18,27 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Entry x:Name="loginInput" 
-                   Placeholder="{x:Static resources:AppResource.Login}" 
+                   Placeholder="{Binding Resources[Login]}" 
                    Text="{Binding Path=Login, Mode=TwoWay}" 
                    Style="{StaticResource EntryStyle}"
                    TextChanged="TextChanged"
                    Grid.Row="0"/>
             <Entry x:Name="passwordFirstInput" 
-                   Placeholder="{x:Static resources:AppResource.Password}" 
+                   Placeholder="{Binding Resources[Password]}" 
                    Text="{Binding Path=Password, Mode=TwoWay}" 
                    Style="{StaticResource EntryStyle}"
                    TextChanged="TextChanged"
                    IsPassword="True" 
                    Grid.Row="1" />
             <Entry x:Name="passwordSecondInput" 
-                   Placeholder="{x:Static resources:AppResource.ConfirmPassword}" 
+                   Placeholder="{Binding Resources[ConfirmPassword]}" 
                    Text="{Binding Path=ConfirmPassword, Mode=TwoWay}" 
                    Style="{StaticResource EntryStyle}"
                    TextChanged="TextChanged"
                    IsPassword="True" 
                    Grid.Row="2"/>
             <Button x:Name="signUpButton" 
-                    Text="{x:Static resources:AppResource.SignUp}" 
+                    Text="{Binding Resources[SignUp]}" 
                     Grid.Row="7"
                     Command="{Binding Register}"
                     Style="{StaticResource ButtonStyle}"/>

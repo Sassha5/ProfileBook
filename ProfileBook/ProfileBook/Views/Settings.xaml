@@ -1,11 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:resources="clr-namespace:ProfileBook.Resources"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ProfileBook.Views.Settings"
-             Title="{x:Static resources:AppResource.Settings}" 
+             Title="{Binding Resources[Settings]}" 
              Style="{StaticResource ContentPageStyle}">
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -19,7 +18,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackLayout Grid.Row="0" Grid.RowSpan="2">
-            <Label Text="{x:Static resources:AppResource.Sorting}" 
+            <Label Text="{Binding Resources[Sorting]}" 
                    FontAttributes="Bold" 
                    Style="{StaticResource MediumLabelStyle}"/>
             <StackLayout Orientation="Horizontal">
@@ -27,7 +26,7 @@
                              IsChecked="{Binding Path=ButtonNameIsChecked, Mode=TwoWay}" 
                              GroupName="sorting"/>
                 <Label 
-                    Text="{x:Static resources:AppResource.Name}" 
+                    Text="{Binding Resources[Name]}" 
                     VerticalOptions="Center"
                     Style="{StaticResource SmallLabelStyle}"/>
             </StackLayout>
@@ -36,7 +35,7 @@
                     IsChecked="{Binding Path=ButtonNicknameIsChecked, Mode=TwoWay}" 
                     GroupName="sorting"/>
                 <Label 
-                    Text="{x:Static resources:AppResource.Nickname}" 
+                    Text="{Binding Resources[Nickname]}" 
                     VerticalOptions="Center"
                     Style="{StaticResource SmallLabelStyle}"/>
             </StackLayout>
@@ -45,26 +44,26 @@
                     IsChecked="{Binding Path=ButtonDateIsChecked, Mode=TwoWay}" 
                     GroupName="sorting"/>
                 <Label 
-                    Text="{x:Static resources:AppResource.Date}"
+                    Text="{Binding Resources[Date]}"
                     VerticalOptions="Center"
                     Style="{StaticResource SmallLabelStyle}"/>
             </StackLayout>
         </StackLayout>
         <StackLayout Orientation="Horizontal" Grid.Row="2">
             <Label 
-                Text="{x:Static resources:AppResource.DarkTheme}" 
+                Text="{Binding Resources[DarkTheme]}" 
                 FontAttributes="Bold"
                 VerticalOptions="Center"
                 Style="{StaticResource MediumLabelStyle}"/>
             <CheckBox IsChecked="{Binding Path=DarkThemeIsChecked, Mode=TwoWay}"/>
         </StackLayout>
         <StackLayout Grid.Row="3">
-            <Label Text="{x:Static resources:AppResource.Language}" FontAttributes="Bold" Style="{StaticResource MediumLabelStyle}"/>
+            <Label Text="{Binding Resources[Language]}" FontAttributes="Bold" Style="{StaticResource MediumLabelStyle}"/>
             <Picker
                 TextColor="{AppThemeBinding Light={StaticResource LightPrimaryTextColor}, 
                                             Dark={StaticResource DarkPrimaryTextColor}}"
-                ItemsSource="{Binding Path=PickerLanguages, Mode=TwoWay}"
-                SelectedIndex="{Binding Path=SelectedLanguage, Mode=TwoWay}"/>
+                ItemsSource="{Binding Path=Languages, Mode=TwoWay}"
+                SelectedItem="{Binding Path=SelectedLanguage, Mode=TwoWay}"/>
         </StackLayout>
     </Grid>
 </ContentPage>
