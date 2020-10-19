@@ -231,6 +231,9 @@
   <data name="Unknown" xml:space="preserve">
     <value>Неизвестный код статуса</value>
   </data>
+  <data name="WrongCredentials" xml:space="preserve">
+    <value>Сочетание логина и пароля неверно</value>
+  </data>
   <data name="Yup" xml:space="preserve">
     <value>Да</value>
   </data>

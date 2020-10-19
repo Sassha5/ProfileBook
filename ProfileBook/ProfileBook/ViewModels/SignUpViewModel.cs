@@ -1,4 +1,5 @@
-﻿using Prism.Navigation;
+﻿using Acr.UserDialogs;
+using Prism.Navigation;
 using ProfileBook.Enums;
 using ProfileBook.Resources;
 using ProfileBook.Services.Registration;
@@ -11,6 +12,7 @@ namespace ProfileBook.ViewModels
     public class SignUpViewModel : ViewModelBase
     {
         private readonly IRegistrationService _registrationService;
+        private readonly IUserDialogs _userDialogs;
 
         public string Login { get; set; }
         public string Password { get; set; }
@@ -18,9 +20,11 @@ namespace ProfileBook.ViewModels
 
 
         public SignUpViewModel(INavigationService navigationService,
-            IRegistrationService registrationService)
+            IRegistrationService registrationService,
+            IUserDialogs userDialogs)
             : base(navigationService)
         {
+            _userDialogs = userDialogs;
             _registrationService = registrationService;
             Title = "Sign Up";
         }
@@ -30,36 +34,27 @@ namespace ProfileBook.ViewModels
             switch (_registrationService.Validate(Login, Password, ConfirmPassword))
             {
                 case Status.LoginIsTaken:
-                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, AppResource.LoginIsTaken, AppResource.Damn); ;
-                    break;
+                    await _userDialogs.AlertAsync(AppResource.LoginIsTaken, AppResource.Oops, AppResource.Damn); break;
                 case Status.LoginIsTooLong:
-                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, AppResource.LoginIsTooLong, AppResource.Ok);
-                    break;
+                    await _userDialogs.AlertAsync(AppResource.LoginIsTooLong, AppResource.Oops, AppResource.Ok); break;
                 case Status.LoginIsTooShort:
-                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, AppResource.LoginIsTooShort, AppResource.Ok);
-                    break;
+                    await _userDialogs.AlertAsync(AppResource.LoginIsTooShort, AppResource.Oops, AppResource.Ok); break;
                 case Status.LoginStartsWithNumber:
-                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, AppResource.LoginStartsWithNumber, AppResource.Damn);
-                    break;
+                    await _userDialogs.AlertAsync(AppResource.LoginStartsWithNumber, AppResource.Oops, AppResource.Damn); break;
                 case Status.PasswordIsTooLong:
-                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, AppResource.PasswordIsTooLong, AppResource.Ok);
-                    break;
+                    await _userDialogs.AlertAsync(AppResource.PasswordIsTooLong, AppResource.Oops, AppResource.Ok); break;
                 case Status.PasswordIsTooShort:
-                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, AppResource.PasswordIsTooShort, AppResource.Damn);
-                    break;
+                    await _userDialogs.AlertAsync(AppResource.PasswordIsTooShort, AppResource.Oops, AppResource.Damn); break;
                 case Status.PasswordIsWeak:
-                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, AppResource.PasswordIsWeak, AppResource.Sure);
-                    break;
+                    await _userDialogs.AlertAsync(AppResource.PasswordIsWeak, AppResource.Oops, AppResource.Sure); break;
                 case Status.PasswordsAreNotEqual:
-                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, AppResource.PasswordsAreNotEqual, AppResource.Thanks);
-                    break;
+                    await _userDialogs.AlertAsync(AppResource.PasswordsAreNotEqual, AppResource.Oops, AppResource.Thanks); break;
                 case Status.Success:
-                    await Application.Current.MainPage.DisplayAlert(AppResource.Success, AppResource.RedirectingToSignIn, AppResource.Finally);
+                    await _userDialogs.AlertAsync(AppResource.RedirectingToSignIn, AppResource.Success, AppResource.Finally);
                     RegistrationSuccess();
                     break;
                 default:
-                    await Application.Current.MainPage.DisplayAlert(AppResource.Oops, AppResource.Unknown, AppResource.Damn);
-                    break;
+                    await _userDialogs.AlertAsync(AppResource.Unknown, AppResource.Oops, AppResource.Damn); break;
             }
         });
 

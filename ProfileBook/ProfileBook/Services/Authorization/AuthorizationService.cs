@@ -25,10 +25,5 @@ namespace ProfileBook.Services.Authorization
             }
             return false;
         }
-
-        public bool CheckAuthorized()
-        {
-            return _settingsManager.AuthorizedUserID != Constants.NoAuthorizedUser;
-        }
     }
 }

@@ -231,6 +231,9 @@
   <data name="Unknown" xml:space="preserve">
     <value>Unknown status code</value>
   </data>
+  <data name="WrongCredentials" xml:space="preserve">
+    <value>Wrong credentials</value>
+  </data>
   <data name="Yup" xml:space="preserve">
     <value>Yup</value>
   </data>

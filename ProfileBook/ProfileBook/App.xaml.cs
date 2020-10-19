@@ -12,11 +12,16 @@ using ProfileBook.Services.ProfileService;
 using ProfileBook.Services.Settings;
 using Plugin.Settings;
 using ProfileBook.Models;
+using Acr.UserDialogs;
 
 namespace ProfileBook
 {
     public partial class App
     {
+        private ISettingsManager _settingsManager;
+        private ISettingsManager SettingsManager =>
+            _settingsManager ??= Container.Resolve<ISettingsManager>();
+
         public App(IPlatformInitializer initializer)
             : base(initializer)
         {
@@ -26,8 +31,12 @@ namespace ProfileBook
         {
             Device.SetFlags(new string[] { "AppTheme_Experimental", "RadioButton_Experimental" });
             InitializeComponent();
-
-            await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignIn)}");
+            Application.Current.UserAppTheme = (OSAppTheme)SettingsManager.Theme; //setting theme to previous session theme
+            if (SettingsManager.AuthorizedUserID != Constants.NoAuthorizedUser)
+            {
+                await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainPage)}");
+            }
+            else await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignIn)}");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -42,6 +51,8 @@ namespace ProfileBook
             containerRegistry.RegisterForNavigation<Settings, SettingsViewModel>();
 
             containerRegistry.RegisterInstance(CrossSettings.Current);
+            containerRegistry.RegisterInstance(UserDialogs.Instance);
+
             containerRegistry.RegisterInstance<ISettingsManager>(Container.Resolve<SettingsManager>());
             containerRegistry.RegisterInstance<IRepository<User>>(Container.Resolve<Repository<User>>());
             containerRegistry.RegisterInstance<IRepository<Profile>>(Container.Resolve<Repository<Profile>>());
