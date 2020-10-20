@@ -9,6 +9,7 @@ namespace ProfileBook.Services.Repository
     public class Repository<T> : IRepository<T> where T : BaseModel, new()
     {
         private readonly SQLiteConnection database;
+        private static readonly object locker = new object();
 
         public Repository()
         {
@@ -18,27 +19,42 @@ namespace ProfileBook.Services.Repository
 
         public IEnumerable<T> GetItems()
         {
-            return database.Table<T>();
+            lock (locker)
+            {
+                return database.Table<T>();
+            }
         }
 
         public T GetItem(int id)
         {
-            return database.Get<T>(id);
+            lock (locker)
+            {
+                return database.Get<T>(id);
+            }
         }
 
         public int DeleteItem(int id)
         {
-            return database.Delete<T>(id);
+            lock (locker)
+            {
+                return database.Delete<T>(id);
+            }
         }
 
         public int InsertItem(T item)
         {
-            return database.Insert(item);
+            lock (locker)
+            {
+                return database.Insert(item);
+            }
         }
 
         public int UpdateItem(T item)
         {
-            return database.Update(item);
+            lock (locker)
+            {
+                return database.Update(item);
+            }
         }
     }
 }

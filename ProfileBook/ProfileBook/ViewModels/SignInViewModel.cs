@@ -39,14 +39,14 @@ namespace ProfileBook.ViewModels
         public ICommand SignUpCommand => _SignUpCommand ??= new Command(OnSignUpCommandAsync);
         
         private ICommand _AuthorizeCommand;
-        public ICommand AuthorizeCommand => _AuthorizeCommand ??= new Command(OnAuthorizeAsync);
+        public ICommand AuthorizeCommand => _AuthorizeCommand ??= new Command(OnAuthorizeCommandAsync);
 
         private async void OnSignUpCommandAsync()
         {
             await NavigationService.NavigateAsync($"{nameof(Views.SignUp)}");
         }
 
-        private async void OnAuthorizeAsync()
+        private async void OnAuthorizeCommandAsync()
         {
             if (_authorizationService.Authorize(Login, Password))
             {

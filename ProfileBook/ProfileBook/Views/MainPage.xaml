@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ProfileBook.Views.MainPage"
              Title="{Binding Resources[MainPage]}"
              x:Name="profilesPage"
@@ -72,14 +74,8 @@
 
         <Button Grid.Row="0" 
                 ImageSource="ic_add.png"
-                BackgroundColor="{AppThemeBinding Light={StaticResource LightNavigationBarColor}, 
-                                            Dark={StaticResource DarkNavigationBarColor}}" 
                 BorderRadius="35"
-                HorizontalOptions="End" 
-                Margin="0,0,20,22" 
-                VerticalOptions="End" 
-                WidthRequest="70" 
-                HeightRequest="70" 
+                Style="{StaticResource CircleButtonStyle}"
                 Command="{Binding CreateProfileCommand}"/>
     </Grid>
 </ContentPage>

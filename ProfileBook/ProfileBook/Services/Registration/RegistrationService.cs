@@ -29,15 +29,15 @@ namespace ProfileBook.Services.Registration
         public Status Validate(string login, string password, string confirmPassword)
         {
             Status status;
-            if (TryFindUser(login)) status = Status.LoginIsTaken;
-            if (login.Length > Constants.MaxLoginLength) status = Status.LoginIsTooLong;
-            if (login.Length < Constants.MinLoginLength) status = Status.LoginIsTooShort;
-            if (char.IsDigit(login[0])) status = Status.LoginStartsWithNumber;
-            if (password.Length > Constants.MaxPasswordLength) status = Status.PasswordIsTooLong;
-            if (password.Length < Constants.MinPasswordLength) status = Status.PasswordIsTooShort;
-            if (!RegexMatch(password)) status = Status.PasswordIsWeak;
-            if (!password.Equals(confirmPassword)) status = Status.PasswordsAreNotEqual;
-            status = Status.Success;
+            if (TryFindUser(login)) { status = Status.LoginIsTaken; }
+            else if (login.Length > Constants.MaxLoginLength) { status = Status.LoginIsTooLong; }
+            else if (login.Length < Constants.MinLoginLength) { status = Status.LoginIsTooShort; }
+            else if (char.IsDigit(login[0])) { status = Status.LoginStartsWithNumber; }
+            else if (password.Length > Constants.MaxPasswordLength) { status = Status.PasswordIsTooLong; }
+            else if (password.Length < Constants.MinPasswordLength) { status = Status.PasswordIsTooShort; }
+            else if (!RegexMatch(password)) { status = Status.PasswordIsWeak; }
+            else if (!password.Equals(confirmPassword)) { status = Status.PasswordsAreNotEqual; }
+            else { status = Status.Success; }
 
             return status;
         }

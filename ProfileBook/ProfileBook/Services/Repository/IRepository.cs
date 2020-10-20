@@ -1,5 +1,4 @@
 ﻿using ProfileBook.Models;
-using SQLite;
 using System.Collections.Generic;
 
 namespace ProfileBook.Services.Repository

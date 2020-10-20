@@ -22,14 +22,12 @@
                    Placeholder="{Binding Resources[Login]}" 
                    Text="{Binding Path=Login, Mode=TwoWay}"
                    TextChanged="TextChanged"
-                   ClearButtonVisibility="WhileEditing"
                    Grid.Row="0"/>
         <Entry x:Name="passwordInput" 
                    Style="{StaticResource EntryStyle}"
                    Placeholder="{Binding Resources[Password]}" 
                    Text="{Binding Path=Password, Mode=TwoWay}" 
                    TextChanged="TextChanged"
-                   ClearButtonVisibility="WhileEditing"
                    IsPassword="True" 
                    Grid.Row="1" />
         <Button x:Name="signInButton" 
