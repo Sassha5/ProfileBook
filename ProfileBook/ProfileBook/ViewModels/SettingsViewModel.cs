@@ -3,6 +3,9 @@ using ProfileBook.Enums;
 using ProfileBook.Localization;
 using ProfileBook.Services.Settings;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ProfileBook.ViewModels
@@ -18,29 +21,29 @@ namespace ProfileBook.ViewModels
         #region Properties
         public bool ButtonNameIsChecked
         {
-            get { return buttonNameIsChecked; }
+            get => buttonNameIsChecked;
             set
             {
                 buttonNameIsChecked = value;
-                if (value == true) SettingsManager.SortingType = (int)Sorting.Name;
+                if (value) { SettingsManager.SortingType = (int)Sorting.Name; }
             }
         }
         public bool ButtonNicknameIsChecked
         {
-            get { return buttonNicknameIsChecked; }
+            get => buttonNicknameIsChecked;
             set
             {
                 buttonNicknameIsChecked = value;
-                if (value == true) SettingsManager.SortingType = (int)Sorting.Nickname;
+                if (value) { SettingsManager.SortingType = (int)Sorting.Nickname; }
             }
         }
         public bool ButtonDateIsChecked
         {
-            get { return buttonDateIsChecked; }
+            get => buttonDateIsChecked;
             set
             {
                 buttonDateIsChecked = value;
-                if (value == true) SettingsManager.SortingType = (int)Sorting.Date;
+                if (value) { SettingsManager.SortingType = (int)Sorting.Date; }
             }
         }
         public bool DarkThemeIsChecked
@@ -49,8 +52,8 @@ namespace ProfileBook.ViewModels
             set
             {
                 darkThemeIsChecked = value;
-                if (value == true) SettingsManager.Theme = (int)OSAppTheme.Dark;
-                else SettingsManager.Theme = (int)OSAppTheme.Light;
+                if (value) { SettingsManager.Theme = (int)OSAppTheme.Dark; }
+                else { SettingsManager.Theme = (int)OSAppTheme.Light; }
             }
         }
         public string SelectedLanguage
@@ -58,7 +61,7 @@ namespace ProfileBook.ViewModels
             get { return _selectedLanguage; }
             set
             {
-                if(value != null) _selectedLanguage = value;
+                if (!string.IsNullOrEmpty(value)) { _selectedLanguage = value; }
                 SetLanguage();
             }
         }
@@ -69,9 +72,8 @@ namespace ProfileBook.ViewModels
         public SettingsViewModel(INavigationService navigationService, ISettingsManager settingsManager)
             : base(navigationService, settingsManager)
         {
-            Title = "Settings";
-            Languages = new List<string>();
-            foreach (string s in System.Enum.GetNames(typeof(Languages))) { Languages.Add(s); }
+            Languages = new List<string>(System.Enum.GetNames(typeof(Languages)));
+
             SelectedLanguage = SettingsManager.Language;
         }
 
@@ -105,8 +107,7 @@ namespace ProfileBook.ViewModels
         private void SetLanguage()
         {
             SettingsManager.Language = SelectedLanguage;
-            MessagingCenter.Send<object, CultureChangedMessage>(this,
-                    string.Empty, new CultureChangedMessage(SelectedLanguage));
+            MessagingCenter.Send<object, CultureChangedMessage>(this, string.Empty, new CultureChangedMessage(SelectedLanguage));
         }
     }
 }

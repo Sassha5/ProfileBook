@@ -5,6 +5,7 @@ using ProfileBook.Resources;
 using ProfileBook.Services.Registration;
 using ProfileBook.Services.Settings;
 using ProfileBook.Views;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -28,10 +29,12 @@ namespace ProfileBook.ViewModels
         {
             _userDialogs = userDialogs;
             _registrationService = registrationService;
-            Title = "Sign Up";
         }
 
-        public ICommand Register => new Command(async () =>
+        private ICommand _RegisterCommand;
+        public ICommand RegisterCommand => _RegisterCommand ??= new Command(OnRegisterCommandAsync);
+
+        private async void OnRegisterCommandAsync()
         {
             switch (_registrationService.Validate(Login, Password, ConfirmPassword))
             {
@@ -58,8 +61,7 @@ namespace ProfileBook.ViewModels
                 default:
                     await _userDialogs.AlertAsync(AppResource.Unknown, AppResource.Oops, AppResource.Damn); break;
             }
-        });
-
+        }
         private async void RegistrationSuccess()
         {
             _registrationService.Register(Login, Password);

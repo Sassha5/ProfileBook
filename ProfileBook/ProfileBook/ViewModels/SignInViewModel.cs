@@ -2,6 +2,7 @@
 using ProfileBook.Resources;
 using ProfileBook.Services.Authorization;
 using ProfileBook.Services.Settings;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -16,30 +17,36 @@ namespace ProfileBook.ViewModels
         public string Password { get; set; }
 
         public SignInViewModel(INavigationService navigationService,
-            ISettingsManager settingsManager,
-            IAuthorizationService authorizationService)
-            : base(navigationService, settingsManager)
+                               ISettingsManager settingsManager,
+                               IAuthorizationService authorizationService)
+                               : base(navigationService, 
+                                      settingsManager)
         {
-            Title = "Sign In";
             _authorizationService = authorizationService;
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            string login = parameters.GetValue<string>($"{nameof(Login)}");
-            if (login != null) //true when navigated from Sign Up
+            if (parameters.TryGetValue($"{nameof(Login)}", out string login)) //true when navigated from sign up
             {
                 Login = login;
+
                 RaisePropertyChanged($"{nameof(Login)}");
             }
         }
 
-        public ICommand SignUp => new Command(async () =>
+        private ICommand _SignUpCommand;
+        public ICommand SignUpCommand => _SignUpCommand ??= new Command(OnSignUpCommandAsync);
+        
+        private ICommand _AuthorizeCommand;
+        public ICommand AuthorizeCommand => _AuthorizeCommand ??= new Command(OnAuthorizeAsync);
+
+        private async void OnSignUpCommandAsync()
         {
             await NavigationService.NavigateAsync($"{nameof(Views.SignUp)}");
-        });
+        }
 
-        public ICommand Authorize => new Command(async () =>
+        private async void OnAuthorizeAsync()
         {
             if (_authorizationService.Authorize(Login, Password))
             {
@@ -51,6 +58,6 @@ namespace ProfileBook.ViewModels
                 Password = string.Empty;
                 RaisePropertyChanged($"{nameof(Password)}");
             }
-        });
+        }
     }
 }

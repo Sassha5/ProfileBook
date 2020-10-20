@@ -40,7 +40,7 @@
             <Button x:Name="signUpButton" 
                     Text="{Binding Resources[SignUp]}" 
                     Grid.Row="7"
-                    Command="{Binding Register}"
+                    Command="{Binding RegisterCommand}"
                     Style="{StaticResource ButtonStyle}"/>
         </Grid>
 </ContentPage>

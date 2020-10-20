@@ -36,7 +36,7 @@
                     Style="{StaticResource ButtonStyle}"
                     Text="{Binding Resources[SignIn]}" 
                     Grid.Row="6"
-                    Command="{Binding Authorize}"/>
+                    Command="{Binding AuthorizeCommand}"/>
         <Label HorizontalOptions="Center"
                 VerticalOptions="CenterAndExpand" Grid.Row="7"
                Style="{StaticResource MediumLabelStyle}">
@@ -45,7 +45,7 @@
                     <Span Text="{Binding Resources[SignUp]}"
                             TextDecorations="Underline">
                         <Span.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SignUp}"/>
+                            <TapGestureRecognizer Command="{Binding SignUpCommand}"/>
                         </Span.GestureRecognizers>
                     </Span>
                 </FormattedString>

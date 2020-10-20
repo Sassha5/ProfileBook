@@ -9,7 +9,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Primary"
                  Priority="0"
-                 Command="{Binding Save}"
+                 Command="{Binding SaveCommand}"
                  IconImageSource="ic_save.png"/>
     </ContentPage.ToolbarItems>
     <Grid>
@@ -25,7 +25,7 @@
         </Grid.RowDefinitions>
         <ImageButton x:Name="profileImage"
                      Source="{Binding Path=ImageSource, Mode=TwoWay}"
-                     Command="{Binding ChooseImage}"
+                     Command="{Binding ImageClickedCommand}"
                      Grid.Row="0"
                      Grid.RowSpan="3"
                      Style="{StaticResource ImageButtonStyle}"

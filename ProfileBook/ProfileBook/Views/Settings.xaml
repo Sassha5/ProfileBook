@@ -5,7 +5,8 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ProfileBook.Views.Settings"
              Title="{Binding Resources[Settings]}" 
-             Style="{StaticResource ContentPageStyle}">
+             Style="{StaticResource ContentPageStyle}"
+             x:Name="settingsPage">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -23,8 +24,8 @@
                    Style="{StaticResource MediumLabelStyle}"/>
             <StackLayout Orientation="Horizontal">
                 <RadioButton 
-                             IsChecked="{Binding Path=ButtonNameIsChecked, Mode=TwoWay}" 
-                             GroupName="sorting"/>
+                    IsChecked="{Binding Path=ButtonNameIsChecked, Mode=TwoWay}" 
+                    GroupName="sorting"/>
                 <Label 
                     Text="{Binding Resources[Name]}" 
                     VerticalOptions="Center"

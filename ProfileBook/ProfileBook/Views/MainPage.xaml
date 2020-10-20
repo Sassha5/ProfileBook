@@ -8,11 +8,11 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Primary"
                  Priority="1"
-                 Command="{Binding Logout}"
+                 Command="{Binding LogoutCommand}"
                  IconImageSource="ic_exit_to_app.png"/>
         <ToolbarItem Order="Primary"
                  Priority="0"
-                 Command="{Binding Settings}"
+                 Command="{Binding SettingsCommand}"
                  IconImageSource="ic_settings.png"/>
     </ContentPage.ToolbarItems>
     <Grid>
@@ -32,17 +32,19 @@
                Margin="0,0,0,40"
                IsVisible="{Binding LabelIsVisible, Mode=TwoWay}"/>
 
-        <ListView ItemsSource="{Binding Profiles}" RowHeight="100" Margin="10">
+        <ListView ItemsSource="{Binding Profiles}" 
+                  RowHeight="100" 
+                  Margin="10">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell Height="100">
                         <ViewCell.ContextActions>
                             <MenuItem Text="{Binding Resources[Edit]}" 
-                                      Command="{Binding Path=BindingContext.Edit, 
+                                      Command="{Binding Path=BindingContext.EditCommand, 
                                         Source={x:Reference profilesPage}}" 
                                       CommandParameter="{Binding .}"/>
                             <MenuItem Text="{Binding Resources[Delete]}" 
-                                      Command="{Binding Path=BindingContext.Delete, 
+                                      Command="{Binding Path=BindingContext.DeleteCommand, 
                                         Source={x:Reference profilesPage}}" 
                                       CommandParameter="{Binding .}"/>
                         </ViewCell.ContextActions>
@@ -52,11 +54,13 @@
                             <Image Source="{Binding ImagePath}" 
                                    Aspect="AspectFit" Margin="5">
                                 <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.OnImageSelected, Source={x:Reference profilesPage}}" CommandParameter="{Binding .}"/>
+                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.ImageSelectedCommand, 
+                                                            Source={x:Reference profilesPage}}" 
+                                                            CommandParameter="{Binding .}"/>
                                 </Image.GestureRecognizers>
                             </Image>
                             <StackLayout VerticalOptions="Center" Margin="10,0,0,0">
-                                <Label Text="{Binding Nickname}" FontAttributes="Bold" Style="{StaticResource SmallLabelStyle}"/>
+                                <Label Text="{Binding Nickname}" Style="{StaticResource SmallLabelStyle}" FontAttributes="Bold"/>
                                 <Label Text="{Binding Name}" Style="{StaticResource SmallLabelStyle}"/>
                                 <Label Text="{Binding Date}" Style="{StaticResource SmallLabelStyle}"/>
                             </StackLayout>
@@ -76,6 +80,6 @@
                 VerticalOptions="End" 
                 WidthRequest="70" 
                 HeightRequest="70" 
-                Command="{Binding CreateProfile}"/>
+                Command="{Binding CreateProfileCommand}"/>
     </Grid>
 </ContentPage>

@@ -18,7 +18,7 @@ namespace ProfileBook.Services.Repository
 
         public IEnumerable<T> GetItems()
         {
-            return database.Table<T>().ToList();
+            return database.Table<T>();
         }
 
         public T GetItem(int id)

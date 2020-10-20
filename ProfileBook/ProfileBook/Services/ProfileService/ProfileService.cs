@@ -20,26 +20,28 @@ namespace ProfileBook.Services.ProfileService
 
         public IEnumerable<Profile> GetCurrentUserProfiles()
         {
-            return _repository.GetItems().Where(x => x.UserId == _settingsManager.AuthorizedUserID).ToList();
+            return _repository.GetItems().Where(x => x.UserId == _settingsManager.AuthorizedUserID);
         }
 
         public IEnumerable<Profile> GetCurrentUserSortedProfiles()
         {
             IEnumerable<Profile> profiles = GetCurrentUserProfiles();
+
             switch (_settingsManager.SortingType)
             {
                 case (int)Sorting.Date:
-                    profiles = profiles.OrderBy(x => x.Date).ToList();
+                    profiles = profiles.OrderBy(x => x.Date);
                     break;
                 case (int)Sorting.Name:
-                    profiles = profiles.OrderBy(x => x.Name).ToList();
+                    profiles = profiles.OrderBy(x => x.Name);
                     break;
                 case (int)Sorting.Nickname:
-                    profiles = profiles.OrderBy(x => x.Nickname).ToList();
+                    profiles = profiles.OrderBy(x => x.Nickname);
                     break;
                 default:
                     break;
             }
+
             return profiles;
         }
 
@@ -55,15 +57,17 @@ namespace ProfileBook.Services.ProfileService
 
         public int SaveProfile(Profile item)
         {
+            int id;
             if (item.Id != 0)
             {
                 _repository.UpdateItem(item);
-                return item.Id;
+                id = item.Id;
             }
             else
             {
-                return _repository.InsertItem(item);
+                id = _repository.InsertItem(item);
             }
+            return id;
         }
     }
 }

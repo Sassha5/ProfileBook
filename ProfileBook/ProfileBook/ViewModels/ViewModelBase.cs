@@ -32,25 +32,14 @@ namespace ProfileBook.ViewModels
             Resources = new LocalizedResources(typeof(AppResource), SettingsManager.Language);
         }
 
-        public virtual void Initialize(INavigationParameters parameters)
-        {
+        public virtual void Initialize(INavigationParameters parameters) { }
 
-        }
+        public virtual void OnNavigatedFrom(INavigationParameters parameters) { }
 
-        public virtual void OnNavigatedFrom(INavigationParameters parameters)
-        {
+        public virtual void OnNavigatedTo(INavigationParameters parameters) { }
 
-        }
+        public virtual void Destroy() { }
 
-        public virtual void OnNavigatedTo(INavigationParameters parameters)
-        {
-
-        }
-
-        public virtual void Destroy()
-        {
-
-        }
         public new void OnPropertyChanged([CallerMemberName] string property = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));

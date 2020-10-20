@@ -22,21 +22,24 @@ namespace ProfileBook.Services.Registration
                 Login = login,
                 Password = password
             };
+
             _repository.InsertItem(user);
         }
 
         public Status Validate(string login, string password, string confirmPassword)
         {
-            if (TryFindUser(login)) return Status.LoginIsTaken;
-            if (login.Length > Constants.MaxLoginLength) return Status.LoginIsTooLong;
-            if (login.Length < Constants.MinLoginLength) return Status.LoginIsTooShort;
-            if (char.IsDigit(login[0])) return Status.LoginStartsWithNumber;
-            if (password.Length > Constants.MaxPasswordLength) return Status.PasswordIsTooLong;
-            if (password.Length < Constants.MinPasswordLength) return Status.PasswordIsTooShort;
-            if (!RegexMatch(password)) return Status.PasswordIsWeak;
-            if (!password.Equals(confirmPassword)) return Status.PasswordsAreNotEqual;
+            Status status;
+            if (TryFindUser(login)) status = Status.LoginIsTaken;
+            if (login.Length > Constants.MaxLoginLength) status = Status.LoginIsTooLong;
+            if (login.Length < Constants.MinLoginLength) status = Status.LoginIsTooShort;
+            if (char.IsDigit(login[0])) status = Status.LoginStartsWithNumber;
+            if (password.Length > Constants.MaxPasswordLength) status = Status.PasswordIsTooLong;
+            if (password.Length < Constants.MinPasswordLength) status = Status.PasswordIsTooShort;
+            if (!RegexMatch(password)) status = Status.PasswordIsWeak;
+            if (!password.Equals(confirmPassword)) status = Status.PasswordsAreNotEqual;
+            status = Status.Success;
 
-            return Status.Success;
+            return status;
         }
 
         private bool RegexMatch(string pass)

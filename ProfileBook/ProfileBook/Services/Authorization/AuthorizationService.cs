@@ -17,13 +17,15 @@ namespace ProfileBook.Services.Authorization
 
         public bool Authorize(string login, string password)
         {
+            bool res = false;
             var user = _repository.GetItems().FirstOrDefault(x => x.Login == login && x.Password == password);
             if (user != null)
             {
                 _settingsManager.AuthorizedUserID = user.Id;
-                return true;
+                res = true;
             }
-            return false;
+
+            return res;
         }
     }
 }

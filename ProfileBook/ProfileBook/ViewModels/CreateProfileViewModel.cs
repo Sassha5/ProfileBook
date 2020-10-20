@@ -14,6 +14,7 @@ namespace ProfileBook.ViewModels
     public class CreateProfileViewModel : ViewModelBase
     {
         private readonly IProfileService _profileService;
+        private readonly IUserDialogs _userDialogs;
 
         private Profile profile;
         private string nickname;
@@ -24,61 +25,45 @@ namespace ProfileBook.ViewModels
         #region Properties
         public string Nickname
         {
-            get { return nickname; }
-            set
-            {
-                nickname = value;
-                RaisePropertyChanged($"{nameof(Nickname)}");
-            }
+            get => nickname;
+            set => SetProperty(ref nickname, value);
         }
         public string Name
         {
-            get { return name; }
-            set
-            {
-                name = value;
-                RaisePropertyChanged($"{nameof(Name)}");
-            }
+            get => name;
+            set => SetProperty(ref name, value);
         }
         public string Description
         {
-            get { return description; }
-            set
-            {
-                description = value;
-                RaisePropertyChanged($"{nameof(Description)}");
-            }
+            get => description;
+            set => SetProperty(ref description, value);
         }
         public string ImageSource
         {
-            get { return imageSource; }
-            set
-            {
-                imageSource = value;
-                RaisePropertyChanged($"{nameof(ImageSource)}");
-            }
+            get => imageSource;
+            set => SetProperty(ref imageSource, value);
         }
         #endregion
 
         public CreateProfileViewModel(INavigationService navigationService,
             IProfileService profileService,
-            ISettingsManager settingsManager)
+            ISettingsManager settingsManager,
+            IUserDialogs userDialogs)
             : base(navigationService, settingsManager)
         {
+            _userDialogs = userDialogs;
             _profileService = profileService;
             ImageSource = Constants.DefaultProfileImage;
-            Title = "New Profile";
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            profile = parameters.GetValue<Profile>("profile");
-            if (profile != null)  //true when navigated from edit button
+            if (parameters.TryGetValue("profile", out Profile _profile))  //true when navigated from edit button
             {
-                Nickname = profile.Nickname;
-                Name = profile.Name;
-                Description = profile.Description;
-                ImageSource = profile.ImagePath;
+                Nickname = _profile.Nickname;
+                Name = _profile.Name;
+                Description = _profile.Description;
+                ImageSource = _profile.ImagePath;
             }
             else
             {
@@ -90,7 +75,22 @@ namespace ProfileBook.ViewModels
             }
         }
 
-        public ICommand Save => new Command(async () =>
+        private ICommand _SaveCommand;
+        public ICommand SaveCommand => _SaveCommand ??= new Command(OnSaveCommandAsync);
+
+        private ICommand _ImageClickedCommand;
+        public ICommand ImageClickedCommand => _ImageClickedCommand ??= new Command(OnImageClickedCommand);
+
+        private void OnImageClickedCommand()
+        {
+            _userDialogs.ActionSheet(new ActionSheetConfig()
+            { Cancel = new ActionSheetOption("Cancel") }
+                            .SetTitle("Choose Type")
+                            .Add("Gallery", () => PickFromGallery(), null)
+                            .Add("Camera", () => TakePhoto(), null)
+                        );
+        }
+        private async void OnSaveCommandAsync()
         {
             profile.Nickname = this.Nickname;
             profile.Name = this.Name;
@@ -98,17 +98,7 @@ namespace ProfileBook.ViewModels
             profile.ImagePath = ImageSource;
             _profileService.SaveProfile(profile);
             await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(Views.MainPage)}");
-        });
-
-        public ICommand ChooseImage => new Command(() =>
-        {
-            UserDialogs.Instance.ActionSheet(new ActionSheetConfig() 
-                            { Cancel = new ActionSheetOption("Cancel") }
-                            .SetTitle("Choose Type")
-                            .Add("Gallery", () => PickFromGallery(), null)
-                            .Add("Camera", () => TakePhoto(), null)
-                        );
-        });
+        }
 
         private async void PickFromGallery()
         {
@@ -116,6 +106,10 @@ namespace ProfileBook.ViewModels
             {
                 MediaFile image = await CrossMedia.Current.PickPhotoAsync();
                 ImageSource = image.Path;
+            }
+            else
+            {
+                _userDialogs.Alert("Not supported", "Sorry", "Ok"); //move to resources
             }
         }
 
@@ -132,6 +126,10 @@ namespace ProfileBook.ViewModels
                     return;
 
                 ImageSource = image.Path;
+            }
+            else
+            {
+                _userDialogs.Alert("Not supported", "Sorry", "Ok"); //move to resources
             }
         }
     }
