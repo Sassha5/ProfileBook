@@ -1,4 +1,5 @@
 ﻿using Plugin.Settings.Abstractions;
+using ProfileBook.Localization;
 using Xamarin.Forms;
 
 namespace ProfileBook.Services.Settings
@@ -23,7 +24,7 @@ namespace ProfileBook.Services.Settings
         }
         public int Theme
         {
-            get => _appSettings.GetValueOrDefault(nameof(Theme), (int)OSAppTheme.Unspecified);
+            get => _appSettings.GetValueOrDefault(nameof(Theme), (int)OSAppTheme.Light);
             set
             {
                 _appSettings.AddOrUpdateValue(nameof(Theme), value);
@@ -33,7 +34,11 @@ namespace ProfileBook.Services.Settings
         public string Language
         {
             get => _appSettings.GetValueOrDefault(nameof(Language), Constants.DefaultLanguage);
-            set => _appSettings.AddOrUpdateValue(nameof(Language), value);
+            set
+            {
+                _appSettings.AddOrUpdateValue(nameof(Language), value);
+                MessagingCenter.Send<object, CultureChangedMessage>(this, string.Empty, new CultureChangedMessage(value));
+            }
         }
     }
 }

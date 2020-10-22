@@ -16,35 +16,35 @@ namespace ProfileBook.ViewModels
         private readonly IProfileService _profileService;
         private readonly IUserDialogs _userDialogs;
 
-        private Profile profile;
+        private Profile _profile;
         
         #region Properties
-        private string nickname;
+        private string _nickname;
         public string Nickname
         {
-            get => nickname;
-            set => SetProperty(ref nickname, value);
+            get => _nickname;
+            set => SetProperty(ref _nickname, value);
         }
 
-        private string name;
+        private string _name;
         public string Name
         {
-            get => name;
-            set => SetProperty(ref name, value);
+            get => _name;
+            set => SetProperty(ref _name, value);
         }
 
-        private string description;
+        private string _description;
         public string Description
         {
-            get => description;
-            set => SetProperty(ref description, value);
+            get => _description;
+            set => SetProperty(ref _description, value);
         }
 
-        private string imageSource;
+        private string _imageSource;
         public string ImageSource
         {
-            get => imageSource;
-            set => SetProperty(ref imageSource, value);
+            get => _imageSource;
+            set => SetProperty(ref _imageSource, value);
         }
         #endregion
 
@@ -70,7 +70,7 @@ namespace ProfileBook.ViewModels
             }
             else
             {
-                profile = new Profile
+                _profile = new Profile
                 {
                     UserId = SettingsManager.AuthorizedUserID,
                     Date = DateTime.Now
@@ -95,11 +95,11 @@ namespace ProfileBook.ViewModels
         }
         private async void OnSaveCommandAsync()
         {
-            profile.Nickname = this.Nickname;
-            profile.Name = this.Name;
-            profile.Description = this.Description;
-            profile.ImagePath = ImageSource;
-            _profileService.SaveProfile(profile);
+            _profile.Nickname = this.Nickname;
+            _profile.Name = this.Name;
+            _profile.Description = this.Description;
+            _profile.ImagePath = ImageSource;
+            _profileService.SaveProfile(_profile);
             await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(Views.MainPage)}");
         }
 

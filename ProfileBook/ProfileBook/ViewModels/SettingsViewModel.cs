@@ -65,7 +65,7 @@ namespace ProfileBook.ViewModels
             set
             {
                 if (!string.IsNullOrEmpty(value)) { _selectedLanguage = value; }
-                SetLanguage();
+                SettingsManager.Language = SelectedLanguage;
             }
         }
         public List<string> Languages { get; set; }
@@ -105,12 +105,6 @@ namespace ProfileBook.ViewModels
                 DarkThemeIsChecked = true;
                 RaisePropertyChanged($"{nameof(DarkThemeIsChecked)}");
             }
-        }
-
-        private void SetLanguage()
-        {
-            SettingsManager.Language = SelectedLanguage;
-            MessagingCenter.Send<object, CultureChangedMessage>(this, string.Empty, new CultureChangedMessage(SelectedLanguage));
         }
     }
 }
