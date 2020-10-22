@@ -1,9 +1,6 @@
 ﻿using Prism.Navigation;
-using ProfileBook.Resources;
 using ProfileBook.Services.Authorization;
 using ProfileBook.Services.Settings;
-using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -54,7 +51,7 @@ namespace ProfileBook.ViewModels
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert(AppResource.Oops, AppResource.WrongCredentials, AppResource.Ok);
+                await Application.Current.MainPage.DisplayAlert(Resources["Oops"], Resources["WrongCredentials"], Resources["Ok"]);
                 Password = string.Empty;
                 RaisePropertyChanged($"{nameof(Password)}");
             }

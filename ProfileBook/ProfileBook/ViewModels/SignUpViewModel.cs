@@ -1,11 +1,9 @@
 ﻿using Acr.UserDialogs;
 using Prism.Navigation;
 using ProfileBook.Enums;
-using ProfileBook.Resources;
 using ProfileBook.Services.Registration;
 using ProfileBook.Services.Settings;
 using ProfileBook.Views;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -39,27 +37,27 @@ namespace ProfileBook.ViewModels
             switch (_registrationService.Validate(Login, Password, ConfirmPassword))
             {
                 case Status.LoginIsTaken:
-                    await _userDialogs.AlertAsync(AppResource.LoginIsTaken, AppResource.Oops, AppResource.Damn); break;
+                    await _userDialogs.AlertAsync(Resources["LoginIsTaken"], Resources["Oops"], Resources["Damn"]); break;
                 case Status.LoginIsTooLong:
-                    await _userDialogs.AlertAsync(AppResource.LoginIsTooLong, AppResource.Oops, AppResource.Ok); break;
+                    await _userDialogs.AlertAsync(Resources["LoginIsTooLong"], Resources["Oops"], Resources["Ok"]); break;
                 case Status.LoginIsTooShort:
-                    await _userDialogs.AlertAsync(AppResource.LoginIsTooShort, AppResource.Oops, AppResource.Ok); break;
+                    await _userDialogs.AlertAsync(Resources["LoginIsTooShort"], Resources["Oops"], Resources["Ok"]); break;
                 case Status.LoginStartsWithNumber:
-                    await _userDialogs.AlertAsync(AppResource.LoginStartsWithNumber, AppResource.Oops, AppResource.Damn); break;
+                    await _userDialogs.AlertAsync(Resources["LoginStartsWithNumber"], Resources["Oops"], Resources["Damn"]); break;
                 case Status.PasswordIsTooLong:
-                    await _userDialogs.AlertAsync(AppResource.PasswordIsTooLong, AppResource.Oops, AppResource.Ok); break;
+                    await _userDialogs.AlertAsync(Resources["PasswordIsTooLong"], Resources["Oops"], Resources["Ok"]); break;
                 case Status.PasswordIsTooShort:
-                    await _userDialogs.AlertAsync(AppResource.PasswordIsTooShort, AppResource.Oops, AppResource.Damn); break;
+                    await _userDialogs.AlertAsync(Resources["PasswordIsTooShort"], Resources["Oops"], Resources["Damn"]); break;
                 case Status.PasswordIsWeak:
-                    await _userDialogs.AlertAsync(AppResource.PasswordIsWeak, AppResource.Oops, AppResource.Sure); break;
+                    await _userDialogs.AlertAsync(Resources["PasswordIsWeak"], Resources["Oops"], Resources["Sure"]); break;
                 case Status.PasswordsAreNotEqual:
-                    await _userDialogs.AlertAsync(AppResource.PasswordsAreNotEqual, AppResource.Oops, AppResource.Thanks); break;
+                    await _userDialogs.AlertAsync(Resources["PasswordsAreNotEqual"], Resources["Oops"], Resources["Thanks"]); break;
                 case Status.Success:
-                    await _userDialogs.AlertAsync(AppResource.RedirectingToSignIn, AppResource.Success, AppResource.Finally);
+                    await _userDialogs.AlertAsync(Resources["RedirectingToSignIn"], Resources["Success"], Resources["Finally"]);
                     RegistrationSuccess();
                     break;
                 default:
-                    await _userDialogs.AlertAsync(AppResource.Unknown, AppResource.Oops, AppResource.Damn); break;
+                    await _userDialogs.AlertAsync(Resources["Unknown"], Resources["Oops"], Resources["Damn"]); break;
             }
         }
         private async void RegistrationSuccess()

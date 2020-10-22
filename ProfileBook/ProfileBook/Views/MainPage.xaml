@@ -41,13 +41,15 @@
                 <DataTemplate>
                     <ViewCell Height="100">
                         <ViewCell.ContextActions>
-                            <MenuItem Text="{Binding Resources[Edit]}" 
+                            <MenuItem Text="{Binding Path=BindingContext.Resources[Edit], 
+                                                     Source={x:Reference profilesPage}}" 
                                       Command="{Binding Path=BindingContext.EditCommand, 
-                                        Source={x:Reference profilesPage}}" 
+                                                        Source={x:Reference profilesPage}}" 
                                       CommandParameter="{Binding .}"/>
-                            <MenuItem Text="{Binding Resources[Delete]}" 
+                            <MenuItem Text="{Binding Path=BindingContext.Resources[Delete], 
+                                                     Source={x:Reference profilesPage}}" 
                                       Command="{Binding Path=BindingContext.DeleteCommand, 
-                                        Source={x:Reference profilesPage}}" 
+                                                        Source={x:Reference profilesPage}}" 
                                       CommandParameter="{Binding .}"/>
                         </ViewCell.ContextActions>
                         <StackLayout Orientation="Horizontal" 
@@ -57,14 +59,18 @@
                                    Aspect="AspectFit" Margin="5">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Path=BindingContext.ImageSelectedCommand, 
-                                                            Source={x:Reference profilesPage}}" 
-                                                            CommandParameter="{Binding .}"/>
+                                                                            Source={x:Reference profilesPage}}" 
+                                                          CommandParameter="{Binding .}"/>
                                 </Image.GestureRecognizers>
                             </Image>
                             <StackLayout VerticalOptions="Center" Margin="10,0,0,0">
-                                <Label Text="{Binding Nickname}" Style="{StaticResource SmallLabelStyle}" FontAttributes="Bold"/>
-                                <Label Text="{Binding Name}" Style="{StaticResource SmallLabelStyle}"/>
-                                <Label Text="{Binding Date}" Style="{StaticResource SmallLabelStyle}"/>
+                                <Label Text="{Binding Nickname}" 
+                                       Style="{StaticResource SmallLabelStyle}" 
+                                       FontAttributes="Bold"/>
+                                <Label Text="{Binding Name}" 
+                                       Style="{StaticResource SmallLabelStyle}"/>
+                                <Label Text="{Binding Date}" 
+                                       Style="{StaticResource SmallLabelStyle}"/>
                             </StackLayout>
                         </StackLayout>
                     </ViewCell>

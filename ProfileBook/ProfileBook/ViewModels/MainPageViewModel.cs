@@ -19,20 +19,13 @@ namespace ProfileBook.ViewModels
     {
         private readonly IProfileService _profileService;
         private readonly ISettingsManager _settingsManager;
-        private bool labelIsVisible;
+        private bool _labelIsVisible;
 
         public ObservableCollection<Profile> Profiles { get; set; }
         public bool LabelIsVisible
         {
-            get { return labelIsVisible; }
-            set
-            {
-                if (labelIsVisible != value)
-                {
-                    labelIsVisible = value;
-                    RaisePropertyChanged($"{nameof(LabelIsVisible)}");
-                }
-            }
+            get => _labelIsVisible;
+            set => SetProperty(ref _labelIsVisible, value);
         }
 
 
@@ -74,7 +67,7 @@ namespace ProfileBook.ViewModels
         #region Methods
         private Task<bool> Confirm()
         {
-            return Application.Current.MainPage.DisplayAlert("", AppResource.SureQuestion, AppResource.Yup, AppResource.Nope);
+            return Application.Current.MainPage.DisplayAlert("", Resources["SureQuestion"], Resources["Yup"], Resources["Nope"]);
         }
 
         private async void OnDeleteCommandAsync(Profile profile)

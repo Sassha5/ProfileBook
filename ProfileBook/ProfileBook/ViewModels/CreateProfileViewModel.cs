@@ -17,27 +17,30 @@ namespace ProfileBook.ViewModels
         private readonly IUserDialogs _userDialogs;
 
         private Profile profile;
-        private string nickname;
-        private string name;
-        private string description;
-        private string imageSource;
-
+        
         #region Properties
+        private string nickname;
         public string Nickname
         {
             get => nickname;
             set => SetProperty(ref nickname, value);
         }
+
+        private string name;
         public string Name
         {
             get => name;
             set => SetProperty(ref name, value);
         }
+
+        private string description;
         public string Description
         {
             get => description;
             set => SetProperty(ref description, value);
         }
+
+        private string imageSource;
         public string ImageSource
         {
             get => imageSource;
@@ -86,8 +89,8 @@ namespace ProfileBook.ViewModels
             _userDialogs.ActionSheet(new ActionSheetConfig()
             { Cancel = new ActionSheetOption("Cancel") }
                             .SetTitle("Choose Type")
-                            .Add("Gallery", () => PickFromGallery(), null)
-                            .Add("Camera", () => TakePhoto(), null)
+                            .Add("Gallery", () => PickFromGalleryAsync(), null)
+                            .Add("Camera", () => TakePhotoAsync(), null)
                         );
         }
         private async void OnSaveCommandAsync()
@@ -100,7 +103,7 @@ namespace ProfileBook.ViewModels
             await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(Views.MainPage)}");
         }
 
-        private async void PickFromGallery()
+        private async void PickFromGalleryAsync()
         {
             if (CrossMedia.Current.IsPickPhotoSupported)
             {
@@ -113,7 +116,7 @@ namespace ProfileBook.ViewModels
             }
         }
 
-        private async void TakePhoto()
+        private async void TakePhotoAsync()
         {
             if (CrossMedia.Current.IsCameraAvailable && CrossMedia.Current.IsTakePhotoSupported)
             {

@@ -34,14 +34,12 @@ namespace ProfileBook
 
             Application.Current.UserAppTheme = (OSAppTheme)SettingsManager.Theme; //setting theme to previous session theme
 
+            string path = nameof(SignIn);
             if (SettingsManager.AuthorizedUserID != Constants.NoAuthorizedUser)
             {
-                await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainPage)}");
+                path = nameof(MainPage);
             }
-            else
-            {
-                await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignIn)}");
-            }
+            await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{path}");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

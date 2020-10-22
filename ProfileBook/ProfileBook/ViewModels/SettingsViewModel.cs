@@ -12,50 +12,53 @@ namespace ProfileBook.ViewModels
 {
     public class SettingsViewModel : ViewModelBase
     {
-        private bool buttonNameIsChecked;
-        private bool buttonNicknameIsChecked;
-        private bool buttonDateIsChecked;
-        private bool darkThemeIsChecked;
-        private string _selectedLanguage;
-
         #region Properties
+        private bool _buttonNameIsChecked;
         public bool ButtonNameIsChecked
         {
-            get => buttonNameIsChecked;
+            get => _buttonNameIsChecked;
             set
             {
-                buttonNameIsChecked = value;
+                _buttonNameIsChecked = value;
                 if (value) { SettingsManager.SortingType = (int)Sorting.Name; }
             }
         }
+
+        private bool _buttonNicknameIsChecked;
         public bool ButtonNicknameIsChecked
         {
-            get => buttonNicknameIsChecked;
+            get => _buttonNicknameIsChecked;
             set
             {
-                buttonNicknameIsChecked = value;
+                _buttonNicknameIsChecked = value;
                 if (value) { SettingsManager.SortingType = (int)Sorting.Nickname; }
             }
         }
+
+        private bool _buttonDateIsChecked;
         public bool ButtonDateIsChecked
         {
-            get => buttonDateIsChecked;
+            get => _buttonDateIsChecked;
             set
             {
-                buttonDateIsChecked = value;
+                _buttonDateIsChecked = value;
                 if (value) { SettingsManager.SortingType = (int)Sorting.Date; }
             }
         }
+
+        private bool _darkThemeIsChecked;
         public bool DarkThemeIsChecked
         {
-            get { return darkThemeIsChecked; }
+            get { return _darkThemeIsChecked; }
             set
             {
-                darkThemeIsChecked = value;
+                _darkThemeIsChecked = value;
                 if (value) { SettingsManager.Theme = (int)OSAppTheme.Dark; }
                 else { SettingsManager.Theme = (int)OSAppTheme.Light; }
             }
         }
+
+        private string _selectedLanguage;
         public string SelectedLanguage
         {
             get { return _selectedLanguage; }
